@@ -1,0 +1,1 @@
+This is a project to automate the medicine delivery system in IITG.
