@@ -1,24 +1,13 @@
 <?php
 session_start();
-$uname="root";
-$host="localhost";
-$pass="8787";
-$db="iitghospital";
-
-$conn=mysqli_connect($host,$uname,$pass,$db);
-
-if(!$conn)
-{
-	echo "Unable to connect to database";
-	exit;
-}
+include_once 'dbconnect.php';
 
 if(isset($_POST['username'])&&isset($_POST['password']))
 {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$username = mysqli_real_escape_string($conn,$username);
-	$password = mysqli_real_escape_string($conn,$password);
+	$password = md5(mysqli_real_escape_string($conn,$password));
 	if(!empty($username)&&!empty($password))
 	{
 		//Check whether the given username and password exist in the directory
@@ -38,7 +27,7 @@ if(isset($_POST['username'])&&isset($_POST['password']))
 				$user_id = $row["id"];
 			}
 			$_SESSION['id']=$user_id;
-		echo "It is valid, and the id is " . $user_id	;
+			header("Location: staff_home.php");
 		}
 	}
 	}
