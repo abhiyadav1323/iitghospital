@@ -50,6 +50,14 @@
       $_SESSION['id'] = $row["id"];
       header("Location: staff_home.php");
     }
+    else
+    {
+      $name=$username=$email=$password=$cpaswword=$dob=$gender=$post="";
+    ?>
+      <script>alert('Error while registering you...');</script>
+    <?php
+    }
+
   }
 
 
