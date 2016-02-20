@@ -52,42 +52,42 @@
       </div>
     </div>
 
+    <div class="col-sm-4 pull-right" style="padding-right: 5%; padding-top: 10%">
 
-    <div class="col-sm-4 pull-right" style="padding-right: 5%; padding-top: 5%">
-      <box class="box box-danger">
-            <button type="button" class="btn btn-block btn-warning btn-lg" data-toggle="modal" data-target="#receptionist">
-              Login for Receptionist</button>
-            <button type="button" class="btn btn-block btn-warning btn-lg" data-toggle="modal" data-target="#doctor">
-              Login for Doctor</button>
-            <button type="button" class="btn btn-block btn-warning btn-lg" data-toggle="modal" data-target="#pharmacist">
-              Login for Pharmacist</button>
-      </box>
-
+      <div class="panel panel-success">
+        <div class="panel-body">
+            <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#receptionist">
+              Login for Receptionist</button><br>
+            <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#doctor">
+              Login for Doctor</button><br>
+            <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#pharmacist">
+              Login for Pharmacist</button><br>
+          <a href="staff_register.php"><button type="button" class="btn btn-block btn-success btn-lg">Register Here</button></a>
+      </div>
+        </div>
 
       <div id="receptionist" class="modal fade" role="dialog">
         <div class="modal-dialog ">
           <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title" style="align-content: center">Login for Receptionist</h4>
+            <div class="modal-title">
+              <h2 style="color: #8a6d3b"><center><b>Login for Receptionist</b></center></h2>
             </div>
             <form class="form-horizontal" role="form" action = "login.php" method="post">
               <div class="modal-body">
-
-
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="username1">Username:</label>
-                  <div class="col-sm-10">
-                    <input type="username" class="form-control" name="username" id="username1" placeholder="Enter username">
+                  <label class="control-label col-sm-3" for="username2">Username:</label>
+                  <div class="col-sm-8">
+                    <input type="username" class="form-control" name="username" id="username2" placeholder="Enter username">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="pwd1">Password:</label>
-                  <div class="col-sm-10">
-                    <input type="password" class="form-control" name="password" id="pwd1" placeholder="Enter password">
+                  <label class="control-label col-sm-3" for="pwd2">Password:</label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" name="password" id="pwd2" placeholder="Enter password">
                   </div>
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
+                  <div class="col-sm-offset-3 col-sm-8">
                     <div class="checkbox">
                       <label><input type="checkbox"> Remember me</label>
                     </div>
@@ -95,8 +95,8 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary" >Login</button>
+                <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-lg btn-success" >Login</button>
               </div>
             </form>
           </div>
@@ -108,25 +108,25 @@
       <div id="doctor" class="modal fade" role="dialog">
         <div class="modal-dialog ">
           <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Login for Doctor</h4>
+            <div class="modal-title">
+              <h2 style="color: #8a6d3b"><center><b>Login for Doctor</b></center></h2>
             </div>
             <form class="form-horizontal" role="form" action = "login.php" method="post">
               <div class="modal-body">
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="username2">Username:</label>
-                  <div class="col-sm-10">
+                  <label class="control-label col-sm-3" for="username2">Username:</label>
+                  <div class="col-sm-8">
                     <input type="username" class="form-control" name="username" id="username2" placeholder="Enter username">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="pwd2">Password:</label>
-                  <div class="col-sm-10">
+                  <label class="control-label col-sm-3" for="pwd2">Password:</label>
+                  <div class="col-sm-8">
                     <input type="password" class="form-control" name="password" id="pwd2" placeholder="Enter password">
                   </div>
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
+                  <div class="col-sm-offset-3 col-sm-8">
                     <div class="checkbox">
                       <label><input type="checkbox"> Remember me</label>
                     </div>
@@ -134,8 +134,8 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary" >Login</button>
+                <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-lg btn-success" >Login</button>
               </div>
             </form>
           </div>
@@ -147,25 +147,25 @@
       <div id="pharmacist" class="modal fade" role="dialog">
         <div class="modal-dialog ">
           <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Login for Pharmacist</h4>
+            <div class="modal-title">
+              <h2 style="color: #8a6d3b"><center><b>Login for Pharmacist</b></center></h2>
             </div>
             <form class="form-horizontal" role="form" action = "login.php" method="post">
             <div class="modal-body">
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="username">Username:</label>
-                  <div class="col-sm-10">
+                  <label class="control-label col-sm-3" for="username">Username:</label>
+                  <div class="col-sm-8">
                     <input type="username" class="form-control" name="username" id="username" placeholder="Enter username">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="pwd">Password:</label>
-                  <div class="col-sm-10">
+                  <label class="control-label col-sm-3" for="pwd">Password:</label>
+                  <div class="col-sm-8">
                     <input type="password" class="form-control" name="password" id="pwd" placeholder="Enter password">
                   </div>
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
+                  <div class="col-sm-offset-3 col-sm-8">
                     <div class="checkbox">
                       <label><input type="checkbox"> Remember me</label>
                     </div>
@@ -173,8 +173,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary" >Login</button>
+              <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-lg btn-success" >Login</button>
             </div>
             </form>
           </div>
