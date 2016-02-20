@@ -2,7 +2,7 @@
 	session_start();
 	if(!isset($_SESSION['id']))
 	{
-		header("Location: temp.html");
+		header("Location: index.html");
 	}
 	else if(isset($_SESSION['id'])!="")
 	{
@@ -13,7 +13,7 @@
 	{
 		session_destroy();
 		unset($_SESSION['id']);
-		header("Location: temp.html");
+		header("Location: index.html");
 	}
 ?>
 

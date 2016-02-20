@@ -39,5 +39,3 @@ if(isset($_POST['username'])&&isset($_POST['password']))
 
 ?>
 
-</fieldset>
-</div>

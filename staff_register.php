@@ -10,14 +10,14 @@
   $name=$username=$email=$password=$cpaswword=$dob=$gender=$post="";
   if(isset($_POST['register']))
   {
-    $name = mysqli_real_escape_string($conn,$_POST['name']);
-    $username = mysqli_real_escape_string($conn,$_POST['username']);
-    $email = mysqli_real_escape_string($conn,$_POST['email']);
-    $password = md5(mysqli_real_escape_string($conn,$_POST['password']));
-    $cpassword = md5(mysqli_real_escape_string($conn,$_POST['cpassword']));
-    $dob = mysqli_real_escape_string($conn,$_POST['dob']);
-    $gender= mysqli_real_escape_string($conn,$_POST['gender']);
-    $post = mysqli_real_escape_string($conn,$_POST['post']);
+    $name = mysqli_real_escape_string($conn,test_input($_POST['name']));
+    $username = mysqli_real_escape_string($conn,test_input($_POST['username']));
+    $email = mysqli_real_escape_string($conn,test_input($_POST['email']));
+    $password = md5(mysqli_real_escape_string($conn,test_input($_POST['password'])));
+    $cpassword = md5(mysqli_real_escape_string($conn,test_input($_POST['cpassword'])));
+    $dob = mysqli_real_escape_string($conn,test_input($_POST['dob']));
+    $gender= mysqli_real_escape_string($conn,test_input($_POST['gender']));
+    $post = mysqli_real_escape_string($conn,test_input($_POST['post']));
 
     $slquery = "SELECT 6 FROM staff WHERE username = '$username'";
     $selectresult = mysqli_query($conn,$slquery);
@@ -57,10 +57,15 @@
       <script>alert('Error while registering you...');</script>
     <?php
     }
-
   }
 
-
+  function test_input($data) 
+  {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
 ?>
 
 <!DOCTYPE html>
