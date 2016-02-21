@@ -2,18 +2,14 @@
 	session_start();
 	if(!isset($_SESSION['id']))
 	{
-		header("Location: temp.html");
-	}
-	else if(isset($_SESSION['id'])!="")
-	{
-		header("Location: staff_home.php");
+		header("Location: index.html");
 	}
 
 	if(isset($_GET['logout']))
 	{
 		session_destroy();
 		unset($_SESSION['id']);
-		header("Location: temp.html");
+		header("Location: index.html");
 	}
 ?>
 
