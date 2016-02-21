@@ -15,10 +15,8 @@ else
 {
     $row = mysqli_fetch_assoc($query_run);
     $name = $row["name"];
+    $_SESSION["patient_id"]=$temp;
 }
-
-
-
 
 ?>
 
@@ -58,8 +56,11 @@ else
     <br> <br>
     <?php echo "Hello doctor. Your current patient is:" . $name ;?>
 </h3>
- <div>
-<button type="button" class="btn btn-primary">View Details</button>
-</div> 
+<div>
+    <div class="col-sm-4">
+        <a href="view_details.php"><button type="button" class="btn btn-block btn-success btn-lg">Do Diagnosis!</button></a>
+    </div>
+</div>
+ 
 </body>
 </html>
