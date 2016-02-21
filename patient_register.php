@@ -27,6 +27,7 @@ if(isset($_POST['register']))
         <script>alert('Roll number already exists');</script>
         <?php
     }
+    //some mistakes here, to be fixed.
     else if(mysqli_num_rows($result)>0)
     {
         $email="";
