@@ -27,7 +27,12 @@ if(isset($_POST['username'])&&isset($_POST['password']))
 				$user_id = $row["id"];
 			}
 			$_SESSION['id']=$user_id;
-			header("Location: staff_home.php");
+			if($row["post"]=="doctor")
+				header("Location: staff_doctor.php");
+			else if($row["post"]=="receptionist")
+				header("Location: staff_recep.php");
+			else if($row["post"]=="pharmacist")
+				header("Location: staff_pharma.php");
 		}
 	}
 	}

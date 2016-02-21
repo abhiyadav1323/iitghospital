@@ -84,6 +84,17 @@
 </head>
 <body>
 <div class="row">
+  <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html" ><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="row" style="padding-top: 4%">
+</div>
+<div class="row">
   <div class="col-sm-offset-3 col-sm-6" style="padding-top: 3%; padding-bottom: 2%">
     <div class="panel panel-danger" >
       <div class="panel-title">
