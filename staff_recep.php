@@ -24,7 +24,7 @@ if(!isset($_SESSION['id']))
     <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+                <a class="navbar-brand" href="staff_recep.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="navbar-brand" href="logout.php?logout" style="font-size: large"><b>Logout</b></a></li>
@@ -37,6 +37,9 @@ if(!isset($_SESSION['id']))
 <h3>
     <?php echo "Hello Receptionist. Your id is ".$_SESSION['id']; ?>
 </h3>
+<br>
+<br>
+<a href="patient_register.php"><button type="button" class="btn btn-block btn-success btn-lg">Register Here</button></a>
 
 </body>
 </html>
