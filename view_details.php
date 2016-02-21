@@ -4,24 +4,37 @@ session_start();
 include_once 'dbconnect.php';
 if(!isset($_SESSION['id']))
     header("Location: index.html");
-$idofpatient = $_SESSION["patient_id"];
-$query = "SELECT * from patients WHERE roll='$idofpatient'";
-$query_run = mysqli_query($conn,$query);
-if(!$query_run)
-    $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
-else
-{
-	$row = mysqli_fetch_assoc($query_run);
-	$name = $row["name"];
-    $email = $row["email"];
-    $dob = $row["dob"];
-    $gender= $row["gender"];
-    $phone = $row["phone"];
-    $roll = $row["roll"];
+else if(!isset($_SESSION['patient_id']))
+    header("Location: staff_recep.php");
+if(isset($_SESSION['patient_id'])) {
+    $idofpatient = $_SESSION["patient_id"];
+    $query = "SELECT * from patients WHERE roll='$idofpatient'";
+    $query_run = mysqli_query($conn, $query);
+    if (!$query_run)
+        $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
+    else {
+        $row = mysqli_fetch_assoc($query_run);
+        $name = $row["name"];
+        $email = $row["email"];
+        $dob = $row["dob"];
+        $gender = $row["gender"];
+        $phone = $row["phone"];
+        $roll = $row["roll"];
 
-    echo $name . $email . $dob . $gender . $phone . $roll;
+        //echo $name . $email . $dob . $gender . $phone . $roll;
+    }
+    if(isset($_POST['register']))
+    {
+        $name = $_POST['name'];
+        $sDate = date("Y-m-d H:i:s");
+        $query1 = "INSERT INTO queue (pid, time, name) VALUES ('$idofpatient', '$sDate', '$name')";
+        $query_run1 = mysqli_query($conn,$query1);
+        ?>
+        <script type="text/javascript">alert('The appointment has been done successfully!');</script>
+        <?php
+
+    }
 }
-
 ?>
 
 
@@ -54,14 +67,68 @@ else
     </nav>
 </div>
 
-<h3>
-Patient Information: <br><br>
-Name of Patient: <?php echo $name; ?><br>
-Email: <?php echo $email; ?><br>
-Date of Birth: <?php echo $dob; ?><br>
-Gender: <?php echo $gender; ?><br>
-Phone Number: <?php echo $phone ; ?><br>
-Roll Number: <?php echo $roll; ?><br>
-</h3>
+<div class="row" style="padding-top: 8%; padding-left: 5%">
+
+    <div class="col-sm-4">
+
+        <!-- Profile Image -->
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <img class="profile-user-img img-responsive img-circle"  src="hospital_photos/small_5.jpg" alt="User profile picture">
+
+                <h3 class="profile-username text-center"><?php echo $name; ?></h3>
+
+                <p class="text-muted text-center">Patient</p>
+
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <b>Email</b> <a class="pull-right"><?php echo $email; ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Date of Birth</b> <a class="pull-right"><?php echo $dob; ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Gender</b> <a class="pull-right"><?php echo $gender; ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Mobile</b> <a class="pull-right"><?php echo $phone ; ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Roll Number</b> <a class="pull-right"><?php echo $roll; ?></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+</div>
+    <div class="col-sm-5 pull-right" style="padding-right: 10%; padding-top: 8%">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" method="post" action="view_details.php">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="name">Name of Doctor:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="name" required id="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-4">
+                            <button type="submit" name="register" class="btn btn-lg btn-success"> Take Appointment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5 pull-right" style="padding-right: 10%; padding-top: 1%">
+        <div class="panel panel-danger">
+            <div class="panel-body">
+                <a href="staff_recep.php"><button type="button" class="btn btn-block btn-danger btn-lg">Go Back!!!</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -7,7 +7,6 @@ include_once 'dbconnect.php';
     if(isset($_POST['register']))
     {
         $idofpatient = $_POST['roll'];
-        $idofdoctor = $_POST['rolld'];
         $query = "SELECT 4 FROM patients WHERE roll = '$idofpatient'";
         $result = mysqli_query($conn,$query);
         $row_cnt = mysqli_num_rows($result);
@@ -19,10 +18,8 @@ include_once 'dbconnect.php';
         }
         else
         {
-            $sDate = date("Y-m-d H:i:s");
-            $query = "INSERT INTO queue (pid, time, did) VALUES ('$idofpatient', '$sDate', '$idofdoctor')";
-            $query_run = mysqli_query($conn,$query);
-            header("Location: patient_home.php");
+            $_SESSION['patient_id']=$idofpatient;
+            header("Location: view_details.php");
         }
     }
 ?>
@@ -54,43 +51,36 @@ include_once 'dbconnect.php';
         </div>
     </nav>
 </div>
-<div class="row" style="padding-top: 4%">
+<div class="row" style="padding-top: 10%">
 </div>
-<h3>
-    <?php echo "Hello Receptionist. Your id is ".$_SESSION['id']; ?>
-</h3>
-<br>
-<br>
 <div class="row">
-    <div class="col-sm-4">
-        <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
-            <div class="form-group">
-               <h3><label class="control-label col-sm-3" for="roll">Patient Id:</label></h3>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" name="roll" required id="roll">
+    <div class="col-sm-4 pull-right" style="padding-right: 5%">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="roll">Patient Id:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="roll" required id="roll">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <button type="submit" name="register" class="btn btn-lg btn-success">View Details</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-10 pull-right" style="padding-right: 5%">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <a href="patient_register.php"><button type="button" class="btn btn-block btn-danger btn-lg">Register</button></a>
                 </div>
             </div>
-            <div class="form-group">
-               <h3><label class="control-label col-sm-3" for="rolld">Id of Preferred Doctor:</label></h3>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" name="rolld" required id="roll">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-7">
-                    <button type="submit" name="register" class="btn btn-lg btn-info">Appointment</button>
-                </div>  
-            </div>
-            </form>    
-    </div>
-    <div class="col-sm-2">
 
+        </div>
     </div>
-    <div class="col-sm-4">
-        <a href="patient_register.php"><button type="button" class="btn btn-block btn-success btn-lg">Register Here</button></a>
-    </div>
-</div>
-
-
 </body>
 </html>
