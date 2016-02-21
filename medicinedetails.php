@@ -1,12 +1,11 @@
 <?php
+session_start();
+include_once 'dbconnect.php';
+if(!isset($_SESSION['id']))
+    header("Location: index.html");
 
+$que = $_POST["medicinequery"];
 
-if(isset($_GET['query']))
-{
-	
-	if(!empty($_GET['query']))
-	{
-		$que = $_GET['query'];
 		$url = 'https://api.fda.gov/drug/label.json?search=' . urlencode($que);
 	
 	$proxy = '172.16.115.19:3128';
@@ -27,22 +26,5 @@ $result = json_decode($data, true);
 $result_string = $result['results'][0]['indications_and_usage'][0];
 
 echo $result_string;
-//print_r($result->results[0]->indications_and_usage);
-	//$result_string = $result->$result['results'][0]['indications_and_usage'][0];
-	//echo $result_string;
-	}
-}
-
 
 ?>
-
-<html>
-<body>
-
-<form method="get">
-	<input type="text" name="query">
-	<button type="submit"> Submit! </button>
-</form>
-
-</body>
-</html>
