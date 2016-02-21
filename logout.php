@@ -4,10 +4,6 @@
 	{
 		header("Location: index.html");
 	}
-	else if(isset($_SESSION['id'])!="")
-	{
-		header("Location: staff_home.php");
-	}
 
 	if(isset($_GET['logout']))
 	{

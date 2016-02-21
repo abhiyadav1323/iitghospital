@@ -48,7 +48,12 @@
       $query_run=mysqli_query($conn,$query1);
       $row = mysqli_fetch_assoc($query_run);
       $_SESSION['id'] = $row["id"];
-      header("Location: staff_home.php");
+      if ($row["post"] == "doctor")
+        header("Location: staff_doctor.php");
+      else if ($row["post"] == "receptionist")
+        header("Location: staff_recep.php");
+      else if ($row["post"] == "pharmacist")
+        header("Location: staff_pharma.php");
     }
     else
     {
@@ -87,7 +92,7 @@
   <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="index.html" ><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+        <a class="navbar-brand" href="index.html" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
       </div>
     </div>
   </nav>
