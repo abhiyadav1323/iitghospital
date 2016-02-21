@@ -51,9 +51,39 @@ include_once 'dbconnect.php';
         </div>
     </nav>
 </div>
-<div class="row" style="padding-top: 10%">
-</div>
-<div class="row">
+
+<div class="row" style="padding-top: 8%; padding-left: 5%">
+    <div class="col-sm-4">
+        <div class="box box-warning">
+            <div class="box-header">
+                <h3 class="box-title">List of Doctors</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-striped">
+                    <tbody>
+                    <?php
+                        $post="doctor";
+                        $slquery="SELECT * from staff WHERE post='$post'";
+                        $query_run = mysqli_query($conn,$slquery);
+                        $count = mysqli_num_rows($query_run);
+                        $i=0;
+                        while($row=mysqli_fetch_assoc($query_run))
+                        {
+                            $i+=1;?>
+                            <tr>
+                                <td><?php echo $i;?>.</td>
+                                <td><?php echo $row["name"]; ?></td>
+                            </tr>
+                    <?php
+                        }
+                    ?>
+                    </tbody></table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+    </div>
     <div class="col-sm-4 pull-right" style="padding-right: 5%">
         <div class="panel panel-primary">
             <div class="panel-body">
@@ -72,15 +102,16 @@ include_once 'dbconnect.php';
                 </form>
             </div>
         </div>
-
-        <div class="col-sm-10 pull-right" style="padding-right: 5%">
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    <a href="patient_register.php"><button type="button" class="btn btn-block btn-danger btn-lg">Register</button></a>
-                </div>
-            </div>
-
         </div>
+
+<!--        <div class="col-sm-4 pull-right" style="padding-right: 10%; padding-top: 1%">-->
+<!--            <div class="panel panel-primary">-->
+<!--                <div class="panel-body">-->
+<!--                    <a href="patient_register.php"><button type="button" class="btn btn-block btn-danger btn-lg">Register</button></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--        </div>-->
     </div>
 </body>
 </html>
