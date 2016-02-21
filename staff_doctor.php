@@ -1,8 +1,25 @@
 <?php
 session_start();
-
+include_once 'dbconnect.php';
 if(!isset($_SESSION['id']))
     header("Location: index.html");
+
+//Assuming that the id is provided to the doctor by the queue as $temp
+
+$temp = 0;
+$query = "SELECT * from patients WHERE id='$temp'";
+$query_run = mysqli_query($conn,$query);
+if(!$query_run)
+    $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
+else
+{
+    $row = mysqli_fetch_assoc($query_run);
+    $name = $row["name"];
+}
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -33,9 +50,11 @@ if(!isset($_SESSION['id']))
     </nav>
 </div>
 <div class="row" style="padding-top: 4%">
-</div>
+</div>  
 <h3>
     <?php echo "Hello Doctor. Your id is ".$_SESSION['id']; ?>
+    <br> <br>
+    <?php echo "Hello doctor. Your current patient is:" . $name ;?>
 </h3>
 
 </body>
