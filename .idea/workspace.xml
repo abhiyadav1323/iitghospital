@@ -40,16 +40,18 @@
       <file leaf-file-name="staff_recep.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/staff_recep.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.90384614">
-              <caret line="83" column="14" selection-start-line="54" selection-start-column="0" selection-end-line="83" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.75961536">
+              <caret line="160" column="10" selection-start-line="160" selection-start-column="10" selection-end-line="160" selection-end-column="10" />
               <folding>
                 <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1456090888583" expanded="true" signature="223:273" placeholder="SELECT 4 FRO..patients..." />
-                <marker date="1456090888583" expanded="true" signature="2436:2474" placeholder="SELECT * fro..queue..." />
+                <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1456091964751" expanded="true" signature="223:273" placeholder="SELECT 4 FRO..patients..." />
+                <marker date="1456091964751" expanded="true" signature="2442:2480" placeholder="SELECT * fro..staff..." />
+                <marker date="1456091964751" expanded="true" signature="5581:5637" placeholder="SELECT * fro..patients..." />
               </folding>
             </state>
           </provider>
@@ -550,18 +552,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/staff_recep.php.BACKUP.19970.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.9375">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1456091730359" expanded="true" signature="223:273" placeholder="SELECT 4 FRO..patients..." />
+            <marker date="1456091730359" expanded="true" signature="2442:2480" placeholder="SELECT * fro..staff..." />
+            <marker date="1456091730359" expanded="true" signature="5581:5637" placeholder="SELECT * fro..patients..." />
+            <marker date="1456091730359" expanded="true" signature="7198:7254" placeholder="SELECT * fro..patients..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/staff_recep.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.90384614">
-          <caret line="83" column="14" selection-start-line="54" selection-start-column="0" selection-end-line="83" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.75961536">
+          <caret line="160" column="10" selection-start-line="160" selection-start-column="10" selection-end-line="160" selection-end-column="10" />
           <folding>
             <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1456090888583" expanded="true" signature="223:273" placeholder="SELECT 4 FRO..patients..." />
-            <marker date="1456090888583" expanded="true" signature="2436:2474" placeholder="SELECT * fro..queue..." />
+            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1456091964751" expanded="true" signature="223:273" placeholder="SELECT 4 FRO..patients..." />
+            <marker date="1456091964751" expanded="true" signature="2442:2480" placeholder="SELECT * fro..staff..." />
+            <marker date="1456091964751" expanded="true" signature="5581:5637" placeholder="SELECT * fro..patients..." />
           </folding>
         </state>
       </provider>
