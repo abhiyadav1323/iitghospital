@@ -1,24 +1,29 @@
 <?php
+
 session_start();
 include_once 'dbconnect.php';
 if(!isset($_SESSION['id']))
     header("Location: index.html");
-
-//Assuming that the id is provided to the doctor by the queue as $temp
-
-$temp = 0;
-$query = "SELECT * from patients WHERE id='$temp'";
+$idofpatient = $_SESSION["patient_id"];
+$query = "SELECT * from patients WHERE id='$idofpatient'";
 $query_run = mysqli_query($conn,$query);
 if(!$query_run)
     $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
 else
 {
-    $row = mysqli_fetch_assoc($query_run);
-    $name = $row["name"];
-    $_SESSION["patient_id"]=$temp;
+	$row = mysqli_fetch_assoc($query_run);
+	$name = $row["name"];
+    $email = $row["email"];
+    $dob = $row["dob"];
+    $gender= $row["gender"];
+    $phone = $row["phone"];
+    $roll = $row["roll"];
+
+    echo $name . $email . $dob . $gender . $phone . $roll;
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,18 +54,14 @@ else
     </nav>
 </div>
 
-<div class="row" style="padding-top: 4%">
-</div>  
 <h3>
-    <?php echo "Hello Doctor. Your id is ".$_SESSION['id']; ?>
-    <br> <br>
-    <?php echo "Hello doctor. Your current patient is:" . $name ;?>
+Patient Information: <br><br>
+Name of Patient: <?php echo $name; ?><br>
+Email: <?php echo $email; ?><br>
+Date of Birth: <?php echo $dob; ?><br>
+Gender: <?php echo $gender; ?><br>
+Phone Number: <?php echo $phone ; ?><br>
+Roll Number: <?php echo $roll; ?><br>
 </h3>
-<div>
-    <div class="col-sm-4">
-        <a href="view_details.php"><button type="button" class="btn btn-block btn-success btn-lg">Do Diagnosis!</button></a>
-    </div>
-</div>
- 
 </body>
 </html>
