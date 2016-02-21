@@ -82,5 +82,6 @@ include_once 'dbconnect.php';
 
         </div>
     </div>
+</div>
 </body>
 </html>
