@@ -22,6 +22,8 @@ include_once 'dbconnect.php';
             header("Location: view_details.php");
         }
     }
+    
+
 ?>
 
 <!DOCTYPE html>
@@ -87,24 +89,47 @@ include_once 'dbconnect.php';
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="roll">Search by part of name:</label>
+                        <label class="control-label col-sm-4" for="roll">Part of Name:</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" name="partofname" required id="roll">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <button type="submit" name="search" class="btn btn-lg btn-success">Search!</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+        <?php
+        if(isset($_POST['search']))
+    {
+        $tobesearched = $_POST["partofname"];
+        $query = "SELECT * from patients WHERE name LIKE '%$tobesearched%'";
+        $query_run = mysqli_query($conn,$query);
 
-        <div class="col-sm-10 pull-right" style="padding-right: 5%">
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    <a href="searchbyname.php"><button type="button" class="btn btn-block btn-danger btn-lg">Search</button></a>
-                </div>
-            </div>
+        if(!$query_run)
+            $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
+        $row_cnt = mysqli_num_rows($query_run);
+        if($row_cnt)
+        {
+            while($row = mysqli_fetch_assoc($query_run))
+            {
+                echo $row["name"] . "</br>";
+            }
+        }   
+        else
+        {
+            echo "No such person! </br>";
+        }
+    }
+        ?>
 
-        </div>
+       
     </div>
+
+        
 </div>
 </body>
 </html>
