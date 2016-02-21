@@ -74,6 +74,8 @@
     <?php
     }
   }
+  else if(isset($_POST['reset']))
+    $name=$username=$email=$password=$cpaswword=$dob=$gender=$post="";
 
   function test_input($data) 
   {
@@ -181,10 +183,13 @@
         </select>
           </div>
       </div>
-
+<br>
       <div class="form-group">
-        <div class="col-sm-offset-5 col-sm-7">
-          <button type="submit" name="register" class="btn btn-lg btn-info">Register</button>
+        <div class="col-sm-offset-2 col-sm-3">
+          <button type="submit" name="reset" class="btn btn-lg btn-danger">Reset</button>
+        </div>
+        <div class="col-sm-4 pull-right">
+          <button type="submit" name="register" class="btn btn-lg btn-success">Register</button>
         </div>
       </div>
 
