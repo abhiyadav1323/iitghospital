@@ -37,6 +37,7 @@ else
     <script src="AdminLTE/js/app.js"></script>
 </head>
 <body>
+
 <div class="row">
     <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
         <div class="container-fluid">
@@ -49,6 +50,7 @@ else
         </div>
     </nav>
 </div>
+
 <div class="row" style="padding-top: 4%">
 </div>  
 <h3>
@@ -56,6 +58,8 @@ else
     <br> <br>
     <?php echo "Hello doctor. Your current patient is:" . $name ;?>
 </h3>
-
+ <div>
+<button type="button" class="btn btn-primary">View Details</button>
+</div> 
 </body>
 </html>
