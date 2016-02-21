@@ -5,7 +5,7 @@ include_once 'dbconnect.php';
 if(!isset($_SESSION['id']))
     header("Location: index.html");
 $idofpatient = $_SESSION["patient_id"];
-$query = "SELECT * from patients WHERE id='$idofpatient'";
+$query = "SELECT * from patients WHERE roll='$idofpatient'";
 $query_run = mysqli_query($conn,$query);
 if(!$query_run)
     $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;

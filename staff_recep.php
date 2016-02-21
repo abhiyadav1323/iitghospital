@@ -6,8 +6,9 @@ include_once 'dbconnect.php';
 
     if(isset($_POST['register']))
     {
-        $roll = $_POST['roll'];
-        $query = "SELECT 4 FROM patients WHERE roll = '$roll'";
+        $idofpatient = $_POST['roll'];
+        $idofdoctor = $_POST['rolld'];
+        $query = "SELECT 4 FROM patients WHERE roll = '$idofpatient'";
         $result = mysqli_query($conn,$query);
         $row_cnt = mysqli_num_rows($result);
         if($row_cnt==0)
@@ -17,7 +18,12 @@ include_once 'dbconnect.php';
             <?php
         }
         else
+        {
+            $sDate = date("Y-m-d H:i:s");
+            $query = "INSERT INTO queue (pid, time, did) VALUES ('$idofpatient', '$sDate', '$idofdoctor')";
+            $query_run = mysqli_query($conn,$query);
             header("Location: patient_home.php");
+        }
     }
 ?>
 
@@ -59,17 +65,23 @@ include_once 'dbconnect.php';
     <div class="col-sm-4">
         <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
             <div class="form-group">
-               <h3><label class="control-label col-sm-3" for="roll">Id:</label></h3>
+               <h3><label class="control-label col-sm-3" for="roll">Patient Id:</label></h3>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" name="roll" required id="roll">
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-7">
-                    <button type="submit" name="register" class="btn btn-lg btn-info">Appointment</button>
+               <h3><label class="control-label col-sm-3" for="rolld">Id of Preferred Doctor:</label></h3>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="rolld" required id="roll">
                 </div>
             </div>
-            </form>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-7">
+                    <button type="submit" name="register" class="btn btn-lg btn-info">Appointment</button>
+                </div>  
+            </div>
+            </form>    
     </div>
     <div class="col-sm-2">
 

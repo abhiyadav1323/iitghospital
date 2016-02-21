@@ -25,7 +25,7 @@
 <div class="row" style="padding-top: 4%">
 </div>
 <h3>
-    hello patient
+    The patient has been successfull entered into the queue!
 </h3>
 </body>
 </html>
