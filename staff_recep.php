@@ -82,6 +82,29 @@ include_once 'dbconnect.php';
 
         </div>
     </div>
+    <div class="col-sm-4 pull-right" style="padding-right: 5%">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="roll">Search by part of name:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="partofname" required id="roll">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-10 pull-right" style="padding-right: 5%">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <a href="searchbyname.php"><button type="button" class="btn btn-block btn-danger btn-lg">Search</button></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 </body>
 </html>
