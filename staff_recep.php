@@ -53,39 +53,45 @@ include_once 'dbconnect.php';
         </div>
     </nav>
 </div>
-<div class="row" style="padding-top: 10%">
-</div>
-<div class="row">
-    <div class="col-sm-4 pull-right" style="padding-right: 5%">
+
+<div class="row" style="padding-top: 8%">
+    <div class="col-sm-4" style="padding-left: 3%">
         <div class="panel panel-primary">
+            <div class="panel-title">
+                <h2 style="color: #8a6d3b"><center><b>List of Doctors</b></center></h2>
+            </div>
+            <!-- /.box-header -->
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="roll">Patient Id:</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" name="roll" required id="roll">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-4">
-                            <button type="submit" name="register" class="btn btn-lg btn-success">View Details</button>
-                        </div>
-                    </div>
-                </form>
+                <table class="table table-striped">
+                    <tbody>
+                    <?php
+                        $post="doctor";
+                        $slquery="SELECT * from staff WHERE post='$post'";
+                        $query_run = mysqli_query($conn,$slquery);
+                        $count = mysqli_num_rows($query_run);
+                        $i=0;
+                        while($row=mysqli_fetch_assoc($query_run))
+                        {
+                            $i+=1;?>
+                            <tr>
+                                <td><?php echo $i;?>.</td>
+                                <td><?php echo $row["name"]; ?></td>
+                            </tr>
+                    <?php
+                        }
+                    ?>
+                    </tbody></table>
             </div>
+            <!-- /.box-body -->
         </div>
 
-        <div class="col-sm-10 pull-right" style="padding-right: 5%">
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    <a href="patient_register.php"><button type="button" class="btn btn-block btn-danger btn-lg">Register</button></a>
-                </div>
-            </div>
-
-        </div>
     </div>
-    <div class="col-sm-4 pull-right" style="padding-right: 5%">
+
+    <div class="col-sm-4" >
         <div class="panel panel-primary">
+            <div class="panel-title">
+               <h2 style="color: #8a6d3b"><center><b>Search by Name</b></center></h2>
+            </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
                     <div class="form-group">
@@ -96,7 +102,7 @@ include_once 'dbconnect.php';
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-4">
-                            <button type="submit" name="search" class="btn btn-lg btn-success">Search!</button>
+                            <button type="submit" name="search" class="btn btn-lg btn-success">Search!!!</button>
                         </div>
                     </div>
                 </form>
@@ -126,10 +132,38 @@ include_once 'dbconnect.php';
     }
         ?>
 
-       
     </div>
+<div class="col-sm-4 " style="padding-right: 3%">
+    <div class="panel panel-primary">
+        <div class="panel-title">
+            <h2 style="color: #8a6d3b"><center><b>Search by ID</b></center></h2>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="roll">Patient Id:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" name="roll" required id="roll">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <button type="submit" name="register" class="btn btn-lg btn-success">View Details</button>
+                    </div>
+                </div>
+                <div class="form-group-lg">
+                    <label class="control-label col-sm-9">Not Yet Registered?</label>
+                    <label class="control-label col-sm-8">
+                        <a href="patient_register.php">Register Here</a>
+                    </label>
 
-        
+                </div>
+            </form>
+        </div>
+
+    </div>
 </div>
+</div>
+
 </body>
 </html>
