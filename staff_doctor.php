@@ -5,18 +5,30 @@ if(!isset($_SESSION['id']))
     header("Location: index.html");
 
 //Assuming that the id is provided to the doctor by the queue as $temp
-
-$temp = 0;
-$query = "SELECT * from patients WHERE id='$temp'";
+$currdocid = $_SESSION['id'];
+$query = "SELECT * from queue WHERE did='$currdocid'";
 $query_run = mysqli_query($conn,$query);
-if(!$query_run)
-    $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
-else
+$row_cnt = mysqli_num_rows($query_run);
+
+if($row_cnt)
 {
+     mysqli_data_seek($query_run,0);
     $row = mysqli_fetch_assoc($query_run);
-    $name = $row["name"];
-    $_SESSION["patient_id"]=$temp;
+    $temp = $row["pid"];
+    $query = "SELECT * from patients WHERE roll='$temp'";
+    $query_run = mysqli_query($conn,$query);
+    if(!$query_run)
+        $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
+    else
+    {
+        $row = mysqli_fetch_assoc($query_run);
+        $name = $row["name"];
+        $_SESSION["patient_id"]=$temp;
+    }
 }
+
+
+
 
 ?>
 
@@ -54,7 +66,9 @@ else
 <h3>
     <?php echo "Hello Doctor. Your id is ".$_SESSION['id']; ?>
     <br> <br>
-    <?php echo "Hello doctor. Your current patient is:" . $name ;?>
+    <?php
+    if($row_cnt==0){ echo "You do not have any patients currently! ";}
+    else echo "Your current patient is:" . $name  ;  ?>
 </h3>
 <div>
     <div class="col-sm-4">
