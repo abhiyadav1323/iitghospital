@@ -75,6 +75,27 @@ if($row_cnt)
         <a href="view_details.php"><button type="button" class="btn btn-block btn-success btn-lg">Do Diagnosis!</button></a>
     </div>
 </div>
+<div class="col-sm-4 pull-right" style="padding-right: 5%">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" method="post" action="medicinedetails.php">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="roll">Enter search term:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="medicinequery" required id="roll">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <button type="submit" name="search" class="btn btn-lg btn-success">View Details</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        
+    </div>
  
 </body>
 </html>
