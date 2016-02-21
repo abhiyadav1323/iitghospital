@@ -1,11 +1,20 @@
 <?php
   session_start();
- 
+  include_once 'dbconnect.php';
   if(isset($_SESSION['id']))
   {
-    header("Location: staff_home.php");
+    $id = $_SESSION['id'];
+    $first_query = "SELECT * FROM staff WHERE id ='$id'";
+    $first_result = mysqli_query($conn,$first_query);
+    $first_row = mysqli_fetch_assoc($first_result);
+    if ($first_row["post"] == "doctor")
+      header("Location: staff_doctor.php");
+    else if ($first_row["post"] == "receptionist")
+      header("Location: staff_recep.php");
+    else if ($first_row["post"] == "pharmacist")
+      header("Location: staff_pharma.php");
   }  
-  include_once 'dbconnect.php';
+
 
   $name=$username=$email=$password=$cpaswword=$dob=$gender=$post="";
   if(isset($_POST['register']))
@@ -26,12 +35,14 @@
     $sql="INSERT INTO staff (name, dob, gender, post, username, password, email) VALUES ('$name', '$dob', '$gender', '$post', '$username', '$password', '$email')";
     if(mysqli_num_rows($selectresult)>0)
     {
+      $username="";
     ?>
       <script>alert('Username already exists');</script>
     <?php
     }
     else if(mysqli_num_rows($result)>0)
     {
+      $email="";
     ?>
       <script>alert('Email already exists');</script>
     <?php

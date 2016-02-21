@@ -1,8 +1,24 @@
 <?php
 session_start();
+include_once 'dbconnect.php';
+    if(!isset($_SESSION['id']))
+        header("Location: index.html");
 
-if(!isset($_SESSION['id']))
-    header("Location: index.html");
+    if(isset($_POST['register']))
+    {
+        $roll = $_POST['roll'];
+        $query = "SELECT 4 FROM patients WHERE roll = '$roll'";
+        $result = mysqli_query($conn,$query);
+        $row_cnt = mysqli_num_rows($result);
+        if($row_cnt==0)
+        {
+            ?>
+            <script>alert('The id is invalid!');</script>
+            <?php
+        }
+        else
+            header("Location: patient_home.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +55,30 @@ if(!isset($_SESSION['id']))
 </h3>
 <br>
 <br>
-<a href="patient_register.php"><button type="button" class="btn btn-block btn-success btn-lg">Register Here</button></a>
+<div class="row">
+    <div class="col-sm-4">
+        <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
+            <div class="form-group">
+               <h3><label class="control-label col-sm-3" for="roll">Id:</label></h3>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="roll" required id="roll">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-7">
+                    <button type="submit" name="register" class="btn btn-lg btn-info">Appointment</button>
+                </div>
+            </div>
+            </form>
+    </div>
+    <div class="col-sm-2">
+
+    </div>
+    <div class="col-sm-4">
+        <a href="patient_register.php"><button type="button" class="btn btn-block btn-success btn-lg">Register Here</button></a>
+    </div>
+</div>
+
 
 </body>
 </html>

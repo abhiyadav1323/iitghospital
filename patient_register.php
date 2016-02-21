@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if(isset($_SESSION['id']))
+if(!isset($_SESSION['id']))
 {
-    header("Location: staff_home.php");
+    header("Location: index.html");
 }
 include_once 'dbconnect.php';
 
@@ -22,17 +22,21 @@ if(isset($_POST['register']))
     $sql="INSERT INTO patients (name, dob, roll, phone, gender, email) VALUES ('$name', '$dob', '$roll', '$phone', '$gender', '$email')";
     if(mysqli_num_rows($selectresult)>0)
     {
+        $roll="";
         ?>
         <script>alert('Roll number already exists');</script>
         <?php
     }
+    else if(mysqli_num_rows($result)>0)
+    {
+        $email="";
+        ?>
+        <script>alert('Email already exists');</script>
+        <?php
+    }
     else if(mysqli_query($conn,$sql))
     {
-        $query1 = "SELECT * FROM patients WHERE roll='$roll'";
-        $query_run=mysqli_query($conn,$query1);
-        $row = mysqli_fetch_assoc($query_run);
-        $_SESSION['id'] = $row["id"];
-        header("Location: patient_home.php");
+        header("Location: staff_recep.php");
     }
     else
     {
@@ -71,7 +75,7 @@ function test_input($data)
     <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+                <a class="navbar-brand" href="staff_recep.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
             </div>
         </div>
     </nav>
@@ -84,7 +88,7 @@ function test_input($data)
             <div class="panel-title">
                 <h2 style="color: #66512c;"><center><b>Register Here</b></center></h2></div>
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="post" action="staff_register.php">
+                <form class="form-horizontal" role="form" method="post" action="patient_register.php">
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="nm">Name:</label>
                         <div class="col-sm-8">
@@ -139,9 +143,9 @@ function test_input($data)
                     </div>
 
                     <div class="form-group-lg">
-                        <label class="control-label col-sm-7">Already Registered?</label>
+                        <label class="control-label col-sm-6">Already Registered?</label>
                         <label class="control-label">
-                            <a href="index.html">Take Appointment Here</a>
+                            <a href="staff_recep.php">Take Appointment Here</a>
                         </label>
                     </div>
             </div>
