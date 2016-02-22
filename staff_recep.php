@@ -61,7 +61,7 @@ include_once 'dbconnect.php';
                 <h2 style="color: #8a6d3b"><center><b>List of Doctors</b></center></h2>
             </div>
             <!-- /.box-header -->
-            <div class="panel-body">
+            <div class="panel-body" style="overflow-y: scroll; height: 70vh;">
                 <ul class="todo-list ui-sortable table-striped">
                     <?php
                         $post="doctor";
@@ -157,41 +157,84 @@ include_once 'dbconnect.php';
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="roll">Part of Name:</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="partofname" required id="roll">
+                            <input type="text" class="form-control" name="partofname" id="roll">
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-4">
-                            <button type="submit" name="search" class="btn btn-lg btn-success">Search!!!</button>
+                        <div class="col-sm-12">
+                            <button type="submit" name="reset" class="btn btn-lg btn-danger pull-left">Reset</button>
+                            <button type="submit" name="search" class="btn btn-lg btn-success pull-right">Search</button>
                         </div>
                     </div>
                 </form>
+                <?php
+                if(isset($_POST['search']))
+                {
+                    $tobesearched = $_POST["partofname"];
+                    $query = "SELECT * from patients WHERE name LIKE '%$tobesearched%'";
+                    $query_run = mysqli_query($conn,$query);
+                    if(!$query_run)
+                        $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
+                    $row_cnt = mysqli_num_rows($query_run);
+                    if($row_cnt)
+                    {
+                    ?>
+                        <br>
+                        <div class="panel panel-danger">
+                            <div class="panel-body" style="overflow-y: scroll; height: 30vh;">
+                        <table class="table table-condensed">
+                        <tbody>
+                    <tr>
+                        <th>
+                            S. No.
+                        </th>
+                        <th>
+                            Name of Patient
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                    </tr>
+                        <?php
+                        $j=0;
+                        while($row = mysqli_fetch_assoc($query_run))
+                        {
+                            $j+=1;
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $j;?>.
+                                </td>
+                                <td>
+                                    <?php echo $row["name"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row["roll"]; ?>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                                </div>
+                            </div>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                <ul class="todo-list ui-sortable table-striped">
+                        <li><?php echo "No such person!";?></li>
+                    </ul>
+                        <?php
+                    }
+                }
+
+                ?>
+
             </div>
         </div>
-        <?php
-        if(isset($_POST['search']))
-    {
-        $tobesearched = $_POST["partofname"];
-        $query = "SELECT * from patients WHERE name LIKE '%$tobesearched%'";
-        $query_run = mysqli_query($conn,$query);
-
-        if(!$query_run)
-            $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
-        $row_cnt = mysqli_num_rows($query_run);
-        if($row_cnt)
-        {
-            while($row = mysqli_fetch_assoc($query_run))
-            {
-                echo $row["name"] . "</br>";
-            }
-        }   
-        else
-        {
-            echo "No such person! </br>";
-        }
-    }
-        ?>
-
     </div>
 <div class="col-sm-4 " style="padding-right: 3%">
     <div class="panel panel-primary">
