@@ -61,9 +61,8 @@ include_once 'dbconnect.php';
                 <h2 style="color: #8a6d3b"><center><b>List of Doctors</b></center></h2>
             </div>
             <!-- /.box-header -->
-            <div class="panel-body">
-                <table class="table table-striped">
-                    <tbody>
+            <div class="panel-body" style="overflow-y: scroll; height: 70vh;">
+                <ul class="todo-list ui-sortable table-striped">
                     <?php
                         $post="doctor";
                         $slquery="SELECT * from staff WHERE post='$post'";
@@ -73,14 +72,75 @@ include_once 'dbconnect.php';
                         while($row=mysqli_fetch_assoc($query_run))
                         {
                             $i+=1;?>
-                            <tr>
-                                <td><?php echo $i;?>.</td>
-                                <td><?php echo $row["name"]; ?></td>
-                            </tr>
+                            <li>
+                                <span class="handle">
+                                    <?php echo $i;?>.
+                                </span>
+                                <span class="text">
+                                    <?php echo $row["name"]; ?>
+                                </span>
+                                <button class="label label-primary pull-right btn btn-xs btn-success" data-toggle="modal" data-target="#mod<?php echo $i;?>">View Queue</button>
+
+                                <div id="mod<?php echo $i;?>" class="modal fade" style="vertical-align: middle" role="dialog">
+                                    <div class="modal-dialog ">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">x</span></button>
+                                                <h2 style="color: #8a6d3b"><center><b>Upcoming Patients</b></center></h2>
+                                            </div>
+                                            <div class="modal-body" style="overflow-y: scroll; height: 60vh;">
+                                                <div class="row">
+                                                    <div class="col-sm-offset-2 col-sm-8">
+                                                        <div class="panel panel-danger">
+                                                            <div class="panel-body">
+                                                                <table class="table table-condensed">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <th>Patient ID</th>
+                                                                        <th>Name of Patient</th>
+                                                                    </tr>
+                                                                    <?php
+                                                                    $name=$row["name"];
+                                                                    $query1 = "SELECT * from queue WHERE name='$name'";
+                                                                    $run = mysqli_query($conn,$query1);
+                                                                    while($row1=mysqli_fetch_assoc($run))
+                                                                    {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?php echo $row1['pid'];?></td>
+                                                                            <?php
+                                                                            $id=$row1["pid"];
+                                                                            $query2 = "SELECT * from patients WHERE roll='$id'";
+                                                                            $run1 = mysqli_query($conn,$query2);
+                                                                            $row2=mysqli_fetch_assoc($run1);
+                                                                            ?>
+                                                                            <td><?php echo $row2["name"]; ?></td>
+                                                                        </tr>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
+                            </li>
+
+
                     <?php
                         }
                     ?>
-                    </tbody></table>
+                </ul>
             </div>
             <!-- /.box-body -->
         </div>
@@ -97,41 +157,84 @@ include_once 'dbconnect.php';
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="roll">Part of Name:</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="partofname" required id="roll">
+                            <input type="text" class="form-control" name="partofname" id="roll">
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-4">
-                            <button type="submit" name="search" class="btn btn-lg btn-success">Search!!!</button>
+                        <div class="col-sm-12">
+                            <button type="submit" name="reset" class="btn btn-lg btn-danger pull-left">Reset</button>
+                            <button type="submit" name="search" class="btn btn-lg btn-success pull-right">Search</button>
                         </div>
                     </div>
                 </form>
+                <?php
+                if(isset($_POST['search']))
+                {
+                    $tobesearched = $_POST["partofname"];
+                    $query = "SELECT * from patients WHERE name LIKE '%$tobesearched%'";
+                    $query_run = mysqli_query($conn,$query);
+                    if(!$query_run)
+                        $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
+                    $row_cnt = mysqli_num_rows($query_run);
+                    if($row_cnt)
+                    {
+                    ?>
+                        <br>
+                        <div class="panel panel-danger">
+                            <div class="panel-body" style="overflow-y: scroll; height: 30vh;">
+                        <table class="table table-condensed">
+                        <tbody>
+                    <tr>
+                        <th>
+                            S. No.
+                        </th>
+                        <th>
+                            Name of Patient
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                    </tr>
+                        <?php
+                        $j=0;
+                        while($row = mysqli_fetch_assoc($query_run))
+                        {
+                            $j+=1;
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $j;?>.
+                                </td>
+                                <td>
+                                    <?php echo $row["name"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row["roll"]; ?>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                                </div>
+                            </div>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                <ul class="todo-list ui-sortable table-striped">
+                        <li><?php echo "No such person!";?></li>
+                    </ul>
+                        <?php
+                    }
+                }
+
+                ?>
+
             </div>
         </div>
-        <?php
-        if(isset($_POST['search']))
-    {
-        $tobesearched = $_POST["partofname"];
-        $query = "SELECT * from patients WHERE name LIKE '%$tobesearched%'";
-        $query_run = mysqli_query($conn,$query);
-
-        if(!$query_run)
-            $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
-        $row_cnt = mysqli_num_rows($query_run);
-        if($row_cnt)
-        {
-            while($row = mysqli_fetch_assoc($query_run))
-            {
-                echo $row["name"] . "</br>";
-            }
-        }   
-        else
-        {
-            echo "No such person! </br>";
-        }
-    }
-        ?>
-
     </div>
 <div class="col-sm-4 " style="padding-right: 3%">
     <div class="panel panel-primary">
