@@ -3,33 +3,6 @@ session_start();
 include_once 'dbconnect.php';
 if(!isset($_SESSION['id']))
     header("Location: index.html");
-
-//Assuming that the id is provided to the doctor by the queue as $temp
-$currdocid = $_SESSION['id'];
-$query = "SELECT * from queue WHERE did='$currdocid'";
-$query_run = mysqli_query($conn,$query);
-$row_cnt = mysqli_num_rows($query_run);
-
-if($row_cnt)
-{
-     mysqli_data_seek($query_run,0);
-    $row = mysqli_fetch_assoc($query_run);
-    $temp = $row["pid"];
-    $query = "SELECT * from patients WHERE roll='$temp'";
-    $query_run = mysqli_query($conn,$query);
-    if(!$query_run)
-        $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
-    else
-    {
-        $row = mysqli_fetch_assoc($query_run);
-        $name = $row["name"];
-        $_SESSION["patient_id"]=$temp;
-    }
-}
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -61,41 +34,127 @@ if($row_cnt)
     </nav>
 </div>
 
-<div class="row" style="padding-top: 4%">
-</div>  
-<h3>
-    <?php echo "Hello Doctor. Your id is ".$_SESSION['id']; ?>
-    <br> <br>
-    <?php
-    if($row_cnt==0){ echo "You do not have any patients currently! ";}
-    else echo "Your current patient is:" . $name  ;  ?>
-</h3>
-<div>
-    <div class="col-sm-4">
-        <a href="view_details.php"><button type="button" class="btn btn-block btn-success btn-lg">Do Diagnosis!</button></a>
-    </div>
+<div class="row" style="padding-top: 8%">
 </div>
-<div class="col-sm-4 pull-right" style="padding-right: 5%">
+<div class="row" style="padding-left: 3%">
+    <div class="col-sm-4">
+        <div class="box " style="border: solid; border-color: #e08e0b ">
+            <div class="box-title">
+                <h2 style="color: #8a6d3b"><center><b>Upcoming Patients</b></center></h2>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow-y: scroll; height: 60vh">
+                <table class="table table-condensed table-striped">
+                    <tbody><tr>
+                        <th>S.No.</th>
+                        <th>ID</th>
+                        <th>Name of Patients</th>
+                    </tr>
+                    <?php
+                    $id=$_SESSION['id'];
+                    $slquery="SELECT * from staff WHERE id='$id'";
+                    $query_run = mysqli_query($conn,$slquery);
+                    $row=mysqli_fetch_assoc($query_run);
+                    $name=$row["name"];
+                    $query1 = "SELECT * from queue WHERE name='$name'";
+                    $run = mysqli_query($conn,$query1);
+                    $i=0;
+                    $currpatid=$currpatname="";
+                    while($row1=mysqli_fetch_assoc($run))
+                    {
+                        $i+=1;
+                        $id=$row1["pid"];
+                        $query2 = "SELECT * from patients WHERE roll='$id'";
+                        $run1 = mysqli_query($conn,$query2);
+                        $row2=mysqli_fetch_assoc($run1);
+                        if($i==1)
+                        {
+                            $currpatname=$row2["name"];
+                            $currpatid=$row2["roll"];
+                            $_SESSION["patient_id"]=$row2["roll"];
+                        }
+
+                    ?>
+                    <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $row2["roll"] ?></td>
+                        <td><?php echo $row2["name"] ?></td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                    </tbody></table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+    <div class="col-sm-4">
         <div class="panel panel-primary">
+            <div class="panel-title">
+                <h2 style="color: #8a6d3b"><center><b>Current Patient</b></center></h2>
+            </div>
+            <div class="panel-body">
+                <?php
+                if($currpatid!="")
+                {
+                    ?>
+                    <div class="col-sm-12">
+                    <label class="control-label col-sm-6">Patient Id:</label>
+                    <label class="control-label col-sm-6"><?php echo $currpatid; ?></label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label col-sm-6">Patient Name:</label>
+                        <label class="control-label col-sm-6"><?php echo $currpatname; ?></label>
+                    </div>
+                    <div class="col-sm-offset-4 col-sm-4">
+                    <a href="diagnosis.php">
+                    <button type="button" name="register" class="btn btn-lg btn-info">Diagnose</button>
+                    </a>
+                    </div>
+                <?php
+                }
+                else
+                {
+                ?>
+                <div class="col-sm-12">
+                    <ul class="todo-list">
+                    <li style="align-content: center">Currently there is no patient!!!</li>
+                    </ul>
+                </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4 " style="padding-right: 3%">
+        <div class="panel panel-primary">
+            <div class="panel-title">
+                <h2 style="color: #8a6d3b"><center><b>Search Medicines</b></center></h2>
+            </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="post" action="medicinedetails.php">
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="roll">Enter search term:</label>
+                        <label class="control-label col-sm-4" for="medicinequery">Med. Name:</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="medicinequery" required id="roll">
+                            <input type="text" class="form-control" name="medicinequery" required id="medicinequery">
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-4">
-                            <button type="submit" name="search" class="btn btn-lg btn-success">View Details</button>
+                        <div class="col-sm-offset-5 col-sm-5">
+                            <button type="submit" name="search" class="btn btn-lg btn-success">Search</button>
                         </div>
                     </div>
                 </form>
             </div>
-        </div>
 
-        
+        </div>
     </div>
- 
+
+</div>
+
+
 </body>
 </html>
