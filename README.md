@@ -8,8 +8,6 @@ Copyright © 2016, team1cs243.
 
 --------------------------------------------------------------------------------
 
-Table of Contents
-
 CONTENTS OF THIS FILE
 ---------------------
    
@@ -24,6 +22,7 @@ CONTENTS OF THIS FILE
 --------------------------------------------------------------------------------
 
 Introduction
+------------
 
 The software intends at automating the working of the IITG hospital to
 ensure that the patient can be given a great experience while visiting the
@@ -39,10 +38,12 @@ the key areas affected by this project.
 --------------------------------------------------------------------------------
 
 Features
+--------
 
 The system can broadly be broken down into the following features:
 
   * Registration:
+  ---------------
 
     Staff members have to explicitly register with the software and provide
     their details – which gives them access to the system with certain
@@ -50,39 +51,48 @@ The system can broadly be broken down into the following features:
     memeber is registered, he/she may sign in with their user details.
 
   * Receptionist Module:
+  ----------------------
 
-    1. Receptionist will be able to make an appointment for patients to the
+    Receptionist will be able to make an appointment for patients to the
     doctors of their choice. As many doctors are available in the hospital,
     patient can schedule an appointment with any doctor of his/her personal
     preference, provided that the doctor is not too busy/doesn't have a
     large queue.
-    2. The registration of new patients can be easily done by the
+    
+    The registration of new patients can be easily done by the
     receptionist. On registering a patient, the receptionist will be given
     a unique ID which can be given to the patient for future use. This ID
     can be used when the patient comes to the hospital in the future and
     wants to schedule an appointment.
-    3. The receptionist will be able to handle emergency cases where he/she
+    
+    The receptionist will be able to handle emergency cases where he/she
     can give higher priority to emergency patients while making an appointment
     to the doctor. The decision as to who is considered an emergency case is
     given to the receptionist, and the doctor can revoke the 'emergency'
     status of a patient if the claim is found to be fraudulent.
-    4. There will be different queues for different doctors and the
+    
+    There will be different queues for different doctors and the
     receptionist will be able to add the patient to the specified
     doctor's queue.
 
   * Doctor's Module:
+  ------------------
 
-    1. The doctor will have the benefit of writing the medicine only once
+    The doctor will have the benefit of writing the medicine only once
     in the computer (in the present scenario, the doctor writes the
     medicine with hand in 2 different sheets of paper which is tedious for
     doctors and consumes a lot of time).
-    2. Auto completion to ease the process of prescribing medicines to patients.
-    3. The doctor will be able to determine through our portal whether
+    
+    Auto completion to ease the process of prescribing medicines to patients.
+    
+    The doctor will be able to determine through our portal whether
     the medicine is available in the pharmacy or not in real time so that if
     the prescribed medicine is not there he/she can change the medicine.
-    4. The doctor will have the ability to check the medical history of the
+    
+    The doctor will have the ability to check the medical history of the
     patient (to some extent) in order to provide a more accurate diagnosis.
-    5. The above feature helps in claiming reimbursement as well. As if the
+    
+    The above feature helps in claiming reimbursement as well. As if the
     medicine is not available in the pharmacy then this will be noted and
     stored in the database so when the patient claims for reimbursement its
     correctness can be checked with the database and will remove any delay of
@@ -91,22 +101,27 @@ The system can broadly be broken down into the following features:
     with this software the solution to this problems comes handy.
 
   * Pharmacist Module:
+  --------------------
 
-    1. This module will provide the feature of altering the medicine inventory
+    This module will provide the feature of altering the medicine inventory
     to the pharmacist.
-    2. He/ She can add/delete medicines in the inventory as and when a change
+    
+    He/ She can add/delete medicines in the inventory as and when a change
     occurs (a medicine stock is bought or a stock is depleted).
-    3. When giving medicines to the patients, the module will automatically
+    
+    When giving medicines to the patients, the module will automatically
     decrement the quantity of that particular medicine so that medicine inventory
     remains up to date at any point of time without explicitly updating such
     type of information.
-    4. This module has the feature of printing medicine receipts which can be
+    
+    This module has the feature of printing medicine receipts which can be
     easily read by anyone opposed to the handwritten medicine receipt we get
     from IITG hospital now.
 
 --------------------------------------------------------------------------------
 
 Requirements
+------------
 
 The main server where the web apps will be hosted will simply require a
 XAMPP installation, and the software which will be used in the hospital
@@ -115,6 +130,7 @@ can be run on a platform with any specifications.
 --------------------------------------------------------------------------------
 
 Bugs
+----
 
 All the issues yet to be completed or resolved are listed in the "Issues"
 tab of Gitlab.
@@ -125,6 +141,7 @@ The detais of the same are available in the Authors section.
 --------------------------------------------------------------------------------
 
 Authors
+-------
 
 The project is updated and maintained by-
 
@@ -135,7 +152,8 @@ Jayesh Mathur https://gitlab.com/jayeshmathur123/
 
 --------------------------------------------------------------------------------
 
-Copyright And Licensing 
+Copyright And Licensing
+-----------------------
 
 This file is part of software - Automatiion of IITG Hospital.
 
