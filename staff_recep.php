@@ -62,8 +62,7 @@ include_once 'dbconnect.php';
             </div>
             <!-- /.box-header -->
             <div class="panel-body">
-                <table class="table table-striped">
-                    <tbody>
+                <ul class="todo-list ui-sortable table-striped">
                     <?php
                         $post="doctor";
                         $slquery="SELECT * from staff WHERE post='$post'";
@@ -73,14 +72,75 @@ include_once 'dbconnect.php';
                         while($row=mysqli_fetch_assoc($query_run))
                         {
                             $i+=1;?>
-                            <tr>
-                                <td><?php echo $i;?>.</td>
-                                <td><?php echo $row["name"]; ?></td>
-                            </tr>
+                            <li>
+                                <span class="handle">
+                                    <?php echo $i;?>.
+                                </span>
+                                <span class="text">
+                                    <?php echo $row["name"]; ?>
+                                </span>
+                                <button class="label label-primary pull-right btn btn-xs btn-success" data-toggle="modal" data-target="#mod<?php echo $i;?>">View Queue</button>
+
+                                <div id="mod<?php echo $i;?>" class="modal fade" style="vertical-align: middle" role="dialog">
+                                    <div class="modal-dialog ">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">x</span></button>
+                                                <h2 style="color: #8a6d3b"><center><b>Upcoming Patients</b></center></h2>
+                                            </div>
+                                            <div class="modal-body" style="overflow-y: scroll; height: 60vh;">
+                                                <div class="row">
+                                                    <div class="col-sm-offset-2 col-sm-8">
+                                                        <div class="panel panel-danger">
+                                                            <div class="panel-body">
+                                                                <table class="table table-condensed">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <th>Patient ID</th>
+                                                                        <th>Name of Patient</th>
+                                                                    </tr>
+                                                                    <?php
+                                                                    $name=$row["name"];
+                                                                    $query1 = "SELECT * from queue WHERE name='$name'";
+                                                                    $run = mysqli_query($conn,$query1);
+                                                                    while($row1=mysqli_fetch_assoc($run))
+                                                                    {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?php echo $row1['pid'];?></td>
+                                                                            <?php
+                                                                            $id=$row1["pid"];
+                                                                            $query2 = "SELECT * from patients WHERE roll='$id'";
+                                                                            $run1 = mysqli_query($conn,$query2);
+                                                                            $row2=mysqli_fetch_assoc($run1);
+                                                                            ?>
+                                                                            <td><?php echo $row2["name"]; ?></td>
+                                                                        </tr>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
+                            </li>
+
+
                     <?php
                         }
                     ?>
-                    </tbody></table>
+                </ul>
             </div>
             <!-- /.box-body -->
         </div>
