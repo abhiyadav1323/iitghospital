@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5eda148d-03ab-46ca-add0-2744ab1b4c87" name="Default" comment="" />
+    <list default="true" id="5eda148d-03ab-46ca-add0-2744ab1b4c87" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE.md" afterPath="$PROJECT_DIR$/LICENSE.md" />
+    </list>
     <ignored path="team1cs243.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -107,8 +109,8 @@
       <file leaf-file-name="LICENSE.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LICENSE.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.7824075">
-              <caret line="688" column="35" selection-start-line="688" selection-start-column="35" selection-end-line="688" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.9537037">
+              <caret line="701" column="50" selection-start-line="687" selection-start-column="0" selection-end-line="701" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -746,8 +748,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.7824075">
-          <caret line="688" column="35" selection-start-line="688" selection-start-column="35" selection-end-line="688" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.9537037">
+          <caret line="701" column="50" selection-start-line="687" selection-start-column="0" selection-end-line="701" selection-end-column="50" />
           <folding />
         </state>
       </provider>
