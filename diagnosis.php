@@ -43,3 +43,30 @@ if(!isset($_SESSION['id']))
         </div>
     </nav>
 </div>
+<div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><?php echo ("Patient id : ".$_SESSION['patient_id']);?></h3>
+
+              <p><?php echo ("Name : ". $row2["name"]);?></p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              Medical info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+
+          <div class="small-box bg-yellow" style="padding: 0px">
+            <div class="inner">
+              <h3><?php echo ("Patient id : ".$_SESSION['patient_id']);?></h3>
+
+              <h3><?php echo ("Name : ". $row2["name"]);?></h3>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              Medical info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
