@@ -8,7 +8,7 @@ $que = $_POST["medicinequery"];
 
 		$url = 'https://api.fda.gov/drug/label.json?search=' . urlencode($que);
 	
-	$proxy = '172.16.115.19:3128';
+	$proxy = '127.0.0.1:8080';
 //$proxyauth = 'user:password';
 
 $ch = curl_init();
