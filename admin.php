@@ -97,7 +97,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="staff_recep.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+                <a class="navbar-brand" href="admin.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="navbar-brand" href="logout.php?logout" style="font-size: large"><b>Logout</b></a></li>
@@ -194,8 +194,13 @@
                         </div>
                     </div>
 
-                    
-                    <input type="hidden" value="<?php echo $row["username"];?>" name="username" />
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="username">Username:</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" name="username" disabled required value="<?php echo $row["username"];?>" id="username" />
+                        </div>
+                    </div>
+                    <input type="hidden" value="<?php echo $row["username"];?>" name="uname" />
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="email">Email:</label>
                         <div class="col-sm-8">

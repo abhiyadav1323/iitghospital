@@ -12,7 +12,7 @@ if(isset($_POST['update']))
     $dob = mysqli_real_escape_string($conn,test_input($_POST['dob']));
     $gender= mysqli_real_escape_string($conn,test_input($_POST['gender']));
     $post = mysqli_real_escape_string($conn,test_input($_POST['post']));
-    $username = mysqli_real_escape_string($conn,test_input($_POST['username']));
+    $username = mysqli_real_escape_string($conn,test_input($_POST['uname']));
     //$password = md5(mysqli_real_escape_string($conn,test_input($_POST['password'])));
    
     //$id = $_SESSION['id'];
