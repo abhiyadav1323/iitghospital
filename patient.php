@@ -1,3 +1,16 @@
+<?php
+  session_start();
+  include_once 'dbconnect.php';
+  if(!isset($_SESSION['id']))
+    header("Location: index.php");
+    $id = $_SESSION["id"];
+    $query = "SELECT * FROM patients WHERE id = '$id'";
+    $result = mysqli_query($conn,$query);
+    $row = mysqli_fetch_assoc($result);
+    $dir='/var/www/html/patients/'.$row['username'].'/';
+    $files = preg_grep('/^([^.])/', scandir($dir, 1));
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,5 +38,128 @@
         </div>
     </nav>
 </div>
+
+<div class="row">
+    <div class="col-sm-5" style="padding-top: 8%; padding-left: 10%">
+        <!-- Profile Image -->
+        <div class="panel panel-primary">
+            <div class="panel-title">
+        <h2 style="color: #8a6d3b"><center><b>Profile</b></center></h2>
+      </div>
+            <div class="panel-body">
+                <table class="table table-condensed">
+                  <tbody>
+                    <tr>
+                      <td><b>Name:</b></td>
+                      <td><?php echo $row["name"]; ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Username:</b></td>
+                      <td><?php echo $row["username"]; ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Email:<b></td>
+                      <td><?php echo $row["email"]; ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Date of Birth:</b></td>
+                      <td><?php echo date_format(date_create($row["dob"]), 'd/m/Y'); ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Gender:</b></td>
+                      <td><?php echo ucfirst($row["gender"]); ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Phone:</b></td>
+                      <td><?php echo ucfirst($row["phone"]); ?></td> 
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="form-group">
+                    <div class="col-sm-12"><center>
+                        <button type="button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#update">Update Details</button>
+                    </center>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    
+    <div id="update" class="modal fade" role="dialog">
+        <div class="modal-dialog ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 style="color: #8a6d3b"><center><b>Update Details</b></center></h2>
+            </div>
+            <form class="form-horizontal" role="form" action = "update.php" method="post">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="username1">Username:</label>
+                  <div class="col-sm-8">
+                    <input type="username" class="form-control" name="username" id="username1" placeholder="Enter username" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="pwd1">Password:</label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" name="password" id="pwd1" placeholder="Enter password" required>
+                  </div>
+                </div>
+                <input type="hidden" value="receptionist" name="post" />
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-lg btn-success" >Login</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+
+
+    <div class="col-sm-5 pull-right" style="padding-top: 8%; padding-right: 10%">
+        <!-- Profile Image -->
+        <div class="panel panel-primary">
+            <div class="panel-title">
+        <h2 style="color: #8a6d3b"><center><b>Medical History</b></center></h2>
+      </div>
+            <div class="panel-body" style="overflow-y: scroll; height: 60vh;">
+                <table class="table table-condensed">
+                  <tbody>
+                    <?php
+                    if(count($files)==0)
+                    {
+                        ?>
+                        <center><h4>No medical history found!!</h4></center>
+                        <?php
+                    }
+                    for($i=0;$i<count($files);$i++)
+                    {
+                        ?>
+                        <tr>
+                            <td><?php echo $i+1; ?>.</td>
+                            <td><?php echo $files[0]; ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                  </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+
+
+</div>
+
 </body>
 </html>

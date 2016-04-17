@@ -40,6 +40,8 @@ if(isset($_POST['register']))
     }
     else if(mysqli_query($conn,$sql))
     {
+        $path = '/var/www/html/patients/'.$username.'/';
+        mkdir($path);
         header("Location: staff_recep.php");
     }
     else
