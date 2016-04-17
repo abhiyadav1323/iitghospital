@@ -28,23 +28,16 @@
     $gender= mysqli_real_escape_string($conn,test_input($_POST['gender']));
     $post = mysqli_real_escape_string($conn,test_input($_POST['post']));
 
-    $slquery = "SELECT 6 FROM staff WHERE username = '$username'";
+    $slquery = "SELECT * FROM staff WHERE username = '$username'";
     $selectresult = mysqli_query($conn,$slquery);
-    $query = "SELECT 8 FROM staff WHERE email = '$email'";
-    $result = mysqli_query($conn,$query);
+    // $query = "SELECT 8 FROM staff WHERE email = '$email'";
+    // $result = mysqli_query($conn,$query);
     $sql="INSERT INTO staff (name, dob, gender, post, username, password, email) VALUES ('$name', '$dob', '$gender', '$post', '$username', '$password', '$email')";
     if(mysqli_num_rows($selectresult)>0)
     {
       $username="";
     ?>
       <script>alert('Username already exists');</script>
-    <?php
-    }
-    else if(mysqli_num_rows($result)>0)
-    {
-      $email="";
-    ?>
-      <script>alert('Email already exists');</script>
     <?php
     }
     else if($password != $cpassword)
