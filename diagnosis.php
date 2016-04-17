@@ -13,6 +13,8 @@ if(!isset($_SESSION['id']))
                         $run1 = mysqli_query($conn,$query2);
                         $row2=mysqli_fetch_assoc($run1);
     }
+      /*if(isset($_POST['done']))
+        echo  "Diagnosis: ". $_POST["Diagnosis"] . "<br> Medicines " . $_POST["Medicine"] .  $_POST["Med1"] . $_POST["Med2"];*/
 ?>
 
 <!DOCTYPE html>
@@ -61,17 +63,16 @@ if(!isset($_SESSION['id']))
 
 
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+ <form action = "diagnosis.php"  method="POST" id = "form1">
  <label for="Diagnosis">Diagnosis</label>
-<textarea class="form-control" rows="5" placeholder="Rx." id = "Diagnosis"></textarea>
+<textarea class="form-control" rows="5" placeholder="Rx." id = "Diagnosis" name = "Diagnosis"></textarea>
 
 
 <div class="field_wrapper">
     <div>
-    <label for="Medicine">Medicines: </label>
-        <input class="form-control" placeholder="Prescription" type="text">
-        <span class="input-group-btn">
+    <label for="Med[]">Medicines: </label>
+        <input  placeholder="Prescription" type="text" size = "100" name = "Med[]" value = ""/>
                       
-                    </span>
         <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png" height="50" width="50" /></a>
     </div>
 </div>
@@ -80,7 +81,8 @@ $(document).ready(function(){
     var max = 25; 
     var addButton = $('.add_button'); 
     var fwrapper = $('.field_wrapper'); 
-    var fieldHTML = '<div> <input class="form-control" placeholder="Prescription" type="text"><a href="javascript:void(0);" class="remove_button" title="Remove field"><img src="remove-icon.png" height="30" width="30"/></a></div>'; //New input field html for when add button is clicked
+    var x = 1; 
+    var fieldHTML = '<div><label for="Med[]">Medicines: </label> <input placeholder="Prescription" type="text" size = "100" name="Med[]" value ="" ><a href="javascript:void(0);" class="remove_button" title="Remove field"><img src="remove-icon.png" height="30" width="30"/></a></div>'; //New input field html for when add button is clicked
     var x = 1; //Initial field counter is 1
     $(addButton).click(function(){ //Once add button is clicked
         if(x < max){ //Check maximum number of input fields if not exceeded
@@ -95,3 +97,15 @@ $(document).ready(function(){
     });
 });
 </script>
+<button type="submit" form="form1" value="Submit" name = "done">Submit</button>
+</form>
+<?php
+if(isset($_POST['done'])){
+$field_values_array = $_POST['Med'];
+foreach($field_values_array as $value){
+  echo " Medices $value <br>" ; 
+}
+}
+
+
+?>
