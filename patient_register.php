@@ -7,7 +7,7 @@ if(!isset($_SESSION['id']))
 }
 include_once 'dbconnect.php';
 
-$name=$email=$phone=$dob=$gender=$roll="";
+$name=$email=$phone=$dob=$gender=$username=$password="";
 if(isset($_POST['register']))
 {
     $name = mysqli_real_escape_string($conn,test_input($_POST['name']));
@@ -15,18 +15,19 @@ if(isset($_POST['register']))
     $dob = mysqli_real_escape_string($conn,test_input($_POST['dob']));
     $gender= mysqli_real_escape_string($conn,test_input($_POST['gender']));
     $phone = mysqli_real_escape_string($conn,test_input($_POST['phone']));
-    $roll = mysqli_real_escape_string($conn,test_input($_POST['roll']));
+    $username = mysqli_real_escape_string($conn,test_input($_POST['username']));
+    $password = md5(mysqli_real_escape_string($conn,test_input($_POST['password'])));
 
-    $slquery = "SELECT * FROM patients WHERE roll = '$roll'";
+    $slquery = "SELECT * FROM patients WHERE username = '$username'";
     $selectresult = mysqli_query($conn,$slquery);
     $query = "SELECT * FROM patients WHERE email = '$email'";
     $result = mysqli_query($conn,$query);
-    $sql="INSERT INTO patients (name, dob, roll, phone, gender, email) VALUES ('$name', '$dob', '$roll', '$phone', '$gender', '$email')";
+    $sql="INSERT INTO patients (name, username, password, dob, phone, gender, email) VALUES ('$name', '$username', '$password', '$dob', '$phone', '$gender', '$email')";
     if(mysqli_num_rows($selectresult)>0)
     {
-        $roll="";
+        $username="";
         ?>
-        <script>alert('Roll number already exists');</script>
+        <script>alert('Username already exists');</script>
         <?php
     }
     
@@ -43,14 +44,14 @@ if(isset($_POST['register']))
     }
     else
     {
-        $name=$email=$phone=$dob=$gender=$roll="";
+        $name=$email=$phone=$dob=$gender=$username=$password="";
         ?>
         <script>alert('Error while registering you...');</script>
         <?php
     }
 }
 else if(isset($_POST['reset']))
-    $name=$email=$phone=$dob=$gender=$roll="";
+    $name=$email=$phone=$dob=$gender=$username=$password="";
 
 function test_input($data)
 {
@@ -102,9 +103,16 @@ function test_input($data)
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3" for="roll">Roll No.:</label>
+                        <label class="control-label col-sm-3" for="username">Username:</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="roll" required value="<?php echo $roll;?>" id="roll" />
+                            <input type="text" class="form-control" name="username" required value="<?php echo $username;?>" id="username" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="password">Password:</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" name="password" required value="<?php echo $password;?>" id="password" />
                         </div>
                     </div>
 

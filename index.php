@@ -81,6 +81,8 @@
               Login for Pharmacist</button>
               <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#office">
               Login for Office Staff</button>
+              <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#patient">
+              Login for Patients</button>
         
       </div>
         </div>
@@ -207,6 +209,39 @@
                   </div>
                 </div>
                 <input type="hidden" value="office" name="post" />
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-lg btn-success" >Login</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+      <div id="patient" class="modal fade" role="dialog">
+        <div class="modal-dialog ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 style="color: #8a6d3b"><center><b>Login for Patients</b></center></h2>
+            </div>
+            <form class="form-horizontal" role="form" action = "login.php" method="post">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="username1">Username:</label>
+                  <div class="col-sm-8">
+                    <input type="username" class="form-control" name="username" id="username1" placeholder="Enter username" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="pwd1">Password:</label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" name="password" id="pwd1" placeholder="Enter password" required>
+                  </div>
+                </div>
+                <input type="hidden" value="patient" name="post" />
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
