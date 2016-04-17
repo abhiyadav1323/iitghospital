@@ -136,7 +136,7 @@
                         <span aria-hidden="true">x</span></button>
                         <h2 style="color: #8a6d3b"><center><b>Staff Details</b></center></h2>
                       </div>
-                      <div class="modal-body" style="overflow-y: scroll; height: 40vh;">
+                      <div class="modal-body" style="overflow-y: scroll; height: 50vh;">
                         <div class="row">
                           <div class="col-sm-offset-2 col-sm-8">
                             <div class="panel panel-danger">
@@ -163,6 +163,10 @@
                                       <td><b>Gender:</b></td>
                                       <td><?php echo ucfirst($row["gender"]); ?></td> 
                                     </tr>
+                                    <tr>
+                                      <td><b>Designation:</b></td>
+                                      <td><?php echo ucfirst($row["post"]); ?></td> 
+                                    </tr>
                                   </tbody>
                                 </table>
                               </div>
@@ -173,6 +177,74 @@
                     </div>
                   </div>
                 </div>
+              </td>
+              <td>
+                <button class="label label-success btn btn-xs" data-toggle="modal" data-target="#edit<?php echo $i;?>">Update</button>
+                <div id="edit<?php echo $i;?>" class="modal fade" role="dialog">
+        <div class="modal-dialog ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 style="color: #8a6d3b"><center><b>Update Details</b></center></h2>
+            </div><br>
+            <form class="form-horizontal" role="form" action = "update_staff.php" method="post">
+              <div class="form-group">
+                        <label class="control-label col-sm-3" for="nm">Name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="name" required value="<?php echo $row["name"];?>" id="nm">
+                        </div>
+                    </div>
+
+                    
+                    <input type="hidden" value="<?php echo $row["username"];?>" name="username" />
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Email:</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" name="email" required value="<?php echo $row["email"];?>" id="email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="dob">Date of Birth:</label>
+                        <div class="col-sm-8">
+                            <input type="date" class="form-control" name="dob" value="<?php echo $row["dob"]; ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="gender">Gender:</label>
+                        <div class="col-sm-8">
+                            <label class="radio-inline">
+                                <input type="radio" id="gender" name="gender" required value="female" <?php if(isset($row["gender"]) && $row["gender"]=="female") echo "checked"; ?>>Female</label>
+                            <label class="radio-inline">
+                                <input type="radio" id="gender" name="gender" required value="male" <?php if(isset($row["gender"]) && $row["gender"]=="male") echo "checked"; ?>>Male</label>
+                            <label class="radio-inline">
+                                <input type="radio" id="gender" name="gender" required value="other" <?php if(isset($row["gender"]) && $row["gender"]=="other") echo "checked"; ?>>Other</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="sel1" class="control-label col-sm-3">Designation:</label>
+                    <div class="col-sm-8">
+                    <select class="form-control" name="post" id="sel1">
+                      <option value="doctor" <?php if(isset($row["post"]) && $row["post"]=="doctor") echo "selected"; ?>>Doctor</option>
+                      <option value="pharmacist" <?php if(isset($row["post"]) && $row["post"]=="pharmacist") echo "selected"; ?>>Pharmacist</option>
+                      <option value="receptionist" <?php if(isset($row["post"]) && $row["post"]=="receptionist") echo "selected"; ?>>Receptionist</option>
+                      <option value="office" <?php if(isset($row["post"]) && $row["post"]=="office") echo "selected"; ?>>Office Staff</option>
+                    </select>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
+                <button type="submit" name="update" class="btn btn-lg btn-success" >Update</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+
               </td>
               <td>
                 <a href="admin.php<?php echo "?del=".$row["id"];?>">
