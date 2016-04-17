@@ -19,7 +19,7 @@
   <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="index.html" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+        <a class="navbar-brand" href="index.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
       </div>
     </div>
   </nav>
@@ -27,41 +27,46 @@
 <div class="row" style="padding-top: 4%">
 </div>
 
+<?php
+  if(isset($_GET['err']))
+  {
+    if($_GET['err']==1)
+    {
+      ?>
+      <script>alert('Error while logging you in')</script>
+      <?php
+    }
+  }
+?>
+
 <div class="row">
 
-    <!--
-    <div class="box box-warning" >
-      <div class="box-body">
-        <div id="pics" class="carousel slide" data-ride="carousel">
-
-          <ol class="carousel-indicators">
-            <li data-target="#pics" data-slide-to="0" class="active"></li>
-            <li data-target="#pics" data-slide-to="1"></li>
-            <li data-target="#pics" data-slide-to="2"></li>
-          </ol>
-
-          <div class="carousel-inner" role="listbox">
-            <div class="item active">
-              <img src="hospital_photos/small_5.jpg" style="height: 450px; width: 900px">
-            </div>
-            <div class="item">
-              <img src="hospital_photos/doctorandpatient.jpg" style="height: 450px; width: 900px">
-            </div>
-            <div class="item">
-              <img src="hospital_photos/layer4.png" style="height: 450px; width: 900px">
-            </div>
-
-            <a class="left carousel-control" href="#pics" role="button" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#pics" role="button" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
+  <div class="col-sm-4" style="padding-left: 6%; padding-top: 12%">
+    <div class="panel panel-primary">
+        <div class="panel-title">
+            <h2 style="color: #8a6d3b"><center><b>Admin Login</b></center></h2>
         </div>
-        -->
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" method="post" action="login.php">
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <input type="password" class="form-control" placeholder="Enter admin key" name="admin_key" required id="admin_key">
+                    </div>
+                </div>
+                <input type="hidden" value="admin" name="post" />
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <button type="submit" name="login" class="btn btn-lg btn-success">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+  </div>
+
+
+
 
 
     <div class="col-sm-4 pull-right" style="padding-right: 6%; padding-top: 12%">
@@ -73,8 +78,10 @@
             <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#doctor">
               Login for Doctor</button>
             <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#pharmacist">
-              Login for Pharmacist</button><br>
-          <a href="staff_register.php"><button type="button" class="btn btn-block btn-success btn-lg">Register Here</button></a>
+              Login for Pharmacist</button>
+              <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#office">
+              Login for Office Staff</button>
+        
       </div>
         </div>
 
@@ -89,23 +96,16 @@
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="username1">Username:</label>
                   <div class="col-sm-8">
-                    <input type="username" class="form-control" name="username" id="username1" placeholder="Enter username">
+                    <input type="username" class="form-control" name="username" id="username1" placeholder="Enter username" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="pwd1">Password:</label>
                   <div class="col-sm-8">
-                    <input type="password" class="form-control" name="password" id="pwd1" placeholder="Enter password">
+                    <input type="password" class="form-control" name="password" id="pwd1" placeholder="Enter password" required>
                   </div>
                 </div>
                 <input type="hidden" value="receptionist" name="post" />
-                <div class="form-group">
-                  <div class="col-sm-offset-3 col-sm-8">
-                    <div class="checkbox">
-                      <label><input type="checkbox"> Remember me</label>
-                    </div>
-                  </div>
-                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
@@ -129,23 +129,17 @@
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="username2">Username:</label>
                   <div class="col-sm-8">
-                    <input type="username" class="form-control" name="username" id="username2" placeholder="Enter username">
+                    <input type="username" class="form-control" name="username" id="username2" placeholder="Enter username" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="pwd2">Password:</label>
                   <div class="col-sm-8">
-                    <input type="password" class="form-control" name="password" id="pwd2" placeholder="Enter password">
+                    <input type="password" class="form-control" name="password" id="pwd2" placeholder="Enter password" required>
                   </div>
                 </div>
                 <input type="hidden" value="doctor" name="post" />
-                <div class="form-group">
-                  <div class="col-sm-offset-3 col-sm-8">
-                    <div class="checkbox">
-                      <label><input type="checkbox"> Remember me</label>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
@@ -169,23 +163,17 @@
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="username">Username:</label>
                   <div class="col-sm-8">
-                    <input type="username" class="form-control" name="username" id="username" placeholder="Enter username">
+                    <input type="username" class="form-control" name="username" id="username" placeholder="Enter username" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="pwd">Password:</label>
                   <div class="col-sm-8">
-                    <input type="password" class="form-control" name="password" id="pwd" placeholder="Enter password">
+                    <input type="password" class="form-control" name="password" id="pwd" placeholder="Enter password" required>
                   </div>
                 </div>
               <input type="hidden" value="pharmacist" name="post" />
-                <div class="form-group">
-                  <div class="col-sm-offset-3 col-sm-8">
-                    <div class="checkbox">
-                      <label><input type="checkbox"> Remember me</label>
-                    </div>
-                  </div>
-                </div>
+                
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
@@ -197,6 +185,41 @@
         </div>
         <!-- /.modal-dialog -->
       </div>
+
+      <div id="office" class="modal fade" role="dialog">
+        <div class="modal-dialog ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 style="color: #8a6d3b"><center><b>Login for Office Staff</b></center></h2>
+            </div>
+            <form class="form-horizontal" role="form" action = "login.php" method="post">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="username1">Username:</label>
+                  <div class="col-sm-8">
+                    <input type="username" class="form-control" name="username" id="username1" placeholder="Enter username" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="pwd1">Password:</label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" name="password" id="pwd1" placeholder="Enter password" required>
+                  </div>
+                </div>
+                <input type="hidden" value="office" name="post" />
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-lg btn-success" >Login</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+
 
     </div>
   </div>

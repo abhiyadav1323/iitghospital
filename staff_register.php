@@ -105,7 +105,7 @@
   <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="index.html" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+        <a class="navbar-brand" href="index.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
       </div>
     </div>
   </nav>
@@ -180,6 +180,7 @@
           <option value="doctor" <?php if(isset($post) && $post=="doctor") echo "selected"; ?>>Doctor</option>
           <option value="pharmacist" <?php if(isset($post) && $post=="pharmacist") echo "selected"; ?>>Pharmacist</option>
           <option value="receptionist" <?php if(isset($post) && $post=="receptionist") echo "selected"; ?>>Receptionist</option>
+          <option value="office" <?php if(isset($post) && $post=="office") echo "selected"; ?>>Office Staff</option>
         </select>
           </div>
       </div>
@@ -196,7 +197,7 @@
       <div class="form-group-lg">
           <label class="control-label col-sm-7">Already Registered?</label>
           <label class="control-label">
-            <a href="index.html">Sign In Here</a>
+            <a href="index.php">Sign In Here</a>
           </label>
         </div>
       </div>

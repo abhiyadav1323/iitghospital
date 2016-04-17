@@ -108,9 +108,9 @@ if(!isset($_SESSION['id']))
                         <label class="control-label col-sm-6"><?php echo $currpatname; ?></label>
                     </div>
                     <div class="col-sm-offset-4 col-sm-4">
-                    <a href="diagnosis.php">
+                    <a href="diagnosis.php"><br>
                     <button type="button" name="register" class="btn btn-lg btn-info">Diagnose</button>
-                    </a>
+                    <br></a>
                     </div>
                 <?php
                 }

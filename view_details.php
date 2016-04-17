@@ -25,9 +25,9 @@ if(isset($_SESSION['patient_id'])) {
     }
     if(isset($_POST['register']))
     {
-        $name = $_POST['name'];
+        $doc_name = $_POST['name'];
         $sDate = date("Y-m-d H:i:s");
-        $query1 = "INSERT INTO queue (pid, time, name) VALUES ('$idofpatient', '$sDate', '$name')";
+        $query1 = "INSERT INTO queue (pid, time, name) VALUES ('$idofpatient', '$sDate', '$doc_name')";
         $query_run1 = mysqli_query($conn,$query1);
         ?>
         <script type="text/javascript">alert('The appointment has been done successfully!');</script>
@@ -74,8 +74,9 @@ if(isset($_SESSION['patient_id'])) {
         <!-- Profile Image -->
         <div class="panel panel-primary">
             <div class="panel-body">
-                <img class="profile-user-img img-responsive img-circle"  src="hospital_photos/small_5.jpg" alt="User profile picture">
-
+                <center>
+                    <img class="profile-user-img img-responsive img-circle"  style="height: 200px; width: 200px" src="hospital_photos/small_5.jpg" alt="User profile picture">
+                </center>
                 <h3 class="profile-username text-center"><?php echo $name; ?></h3>
 
                 <p class="text-muted text-center">Patient</p>
@@ -85,10 +86,10 @@ if(isset($_SESSION['patient_id'])) {
                         <b>Email</b> <a class="pull-right"><?php echo $email; ?></a>
                     </li>
                     <li class="list-group-item">
-                        <b>Date of Birth</b> <a class="pull-right"><?php echo $dob; ?></a>
+                        <b>Date of Birth</b> <a class="pull-right"><?php echo date_format(date_create($dob), 'd/m/Y'); ?></a>
                     </li>
                     <li class="list-group-item">
-                        <b>Gender</b> <a class="pull-right"><?php echo $gender; ?></a>
+                        <b>Gender</b> <a class="pull-right"><?php echo ucfirst($gender); ?></a>
                     </li>
                     <li class="list-group-item">
                         <b>Mobile</b> <a class="pull-right"><?php echo $phone ; ?></a>

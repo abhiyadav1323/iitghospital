@@ -1,6 +1,17 @@
 <?php
 session_start();
 include_once 'dbconnect.php';
+if(isset($_POST['post'])&&$_POST['post']=="admin")
+{
+	if($_POST['admin_key']=="admin")
+	{
+		$_SESSION['id'] = "admin";
+		header('location: admin.php');
+	}
+	else
+		header('location: index.php?err=1');
+}
+
 
 if(isset($_POST['username'])&&isset($_POST['password']))
 {
@@ -15,17 +26,20 @@ if(isset($_POST['username'])&&isset($_POST['password']))
 		$query = "SELECT * FROM staff WHERE username='$username' AND Password='$password'";
 		$query_run=mysqli_query($conn,$query);
 		if(!$query_run)
-			$err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
+			header('location: index.php?err=1');
+			//$err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
 		else{
 
 			$row_cnt = mysqli_num_rows($query_run);
 		if($row_cnt==0)
-			$err = 'The username/password combination is invalid!';
+			header('location: index.php?err=1');
+			//$err = 'The username/password combination is invalid!';
 		else
 		{
 			$row = mysqli_fetch_assoc($query_run);
 			if(strcmp($row["post"],$_POST['post']))
-				$err = "You are not ".$_POST['post']."<br>"."Sign in through login for ".$row['post'];
+				header('location: index.php?err=1');
+				//$err = "You are not ".$_POST['post']."<br>"."Sign in through login for ".$row['post'];
 			else
 			{
 				$_SESSION['id'] = $row["id"];
@@ -35,12 +49,13 @@ if(isset($_POST['username'])&&isset($_POST['password']))
 					header("Location: staff_recep.php");
 				else if ($row["post"] == "pharmacist")
 					header("Location: staff_pharma.php");
+				else if ($row["post"] == "office")
+					header("Location: staff_office.php");
 			}
 		}
 	}
 	}
-	else
-		$err = 'Please enter both the username and password!';
+	
 }
 ?>
 <!DOCTYPE html>
@@ -64,7 +79,7 @@ if(isset($_POST['username'])&&isset($_POST['password']))
 	<nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index.html" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+				<a class="navbar-brand" href="index.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
 			</div>
 		</div>
 	</nav>
@@ -73,9 +88,7 @@ if(isset($_POST['username'])&&isset($_POST['password']))
 </div>
 <div class="row">
 	<div class="col-sm-12">
-		<h3>
-			<?php echo $err; ?>
-		</h3>
+		
 	</div>
 </div>
 </body>
