@@ -3,12 +3,19 @@
   include_once 'dbconnect.php';
   if(!isset($_SESSION['id']))
     header("Location: index.php");
+   
     $id = $_SESSION["id"];
     $query = "SELECT * FROM patients WHERE id = '$id'";
     $result = mysqli_query($conn,$query);
     $row = mysqli_fetch_assoc($result);
     $dir='/var/www/html/patients/'.$row['username'].'/';
     $files = preg_grep('/^([^.])/', scandir($dir, 1));
+    $name = $row['name'];
+    $email = $row['email'];
+    $dob = $row['dob'];
+    $username = $row['username'];
+    $phone = $row['phone'];
+    $gender = $row['gender'];
 ?>
 
 <!DOCTYPE html>
@@ -95,24 +102,55 @@
               <h2 style="color: #8a6d3b"><center><b>Update Details</b></center></h2>
             </div>
             <form class="form-horizontal" role="form" action = "update.php" method="post">
-              <div class="modal-body">
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="username1">Username:</label>
-                  <div class="col-sm-8">
-                    <input type="username" class="form-control" name="username" id="username1" placeholder="Enter username" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-3" for="pwd1">Password:</label>
-                  <div class="col-sm-8">
-                    <input type="password" class="form-control" name="password" id="pwd1" placeholder="Enter password" required>
-                  </div>
-                </div>
-                <input type="hidden" value="receptionist" name="post" />
-              </div>
-              <div class="modal-footer">
+              <div class="form-group">
+                        <label class="control-label col-sm-3" for="nm">Name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="name" required value="<?php echo $name;?>" id="nm">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="username">Username:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="username" required value="<?php echo $username;?>" id="username" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Email:</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" name="email" required value="<?php echo $email;?>" id="email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="phone">Mobile:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="phone" class="form-control" value="<?php echo $phone;?>" required id="phone" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="dob">Date of Birth:</label>
+                        <div class="col-sm-8">
+                            <input type="date" class="form-control" name="dob" value="<?php echo $dob; ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="gender">Gender:</label>
+                        <div class="col-sm-8">
+                            <label class="radio-inline">
+                                <input type="radio" id="gender" name="gender" required value="female" <?php if(isset($gender) && $gender=="female") echo "checked"; ?>>Female</label>
+                            <label class="radio-inline">
+                                <input type="radio" id="gender" name="gender" required value="male" <?php if(isset($gender) && $gender=="male") echo "checked"; ?>>Male</label>
+                            <label class="radio-inline">
+                                <input type="radio" id="gender" name="gender" required value="other" <?php if(isset($gender) && $gender=="other") echo "checked"; ?>>Other</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-lg btn-success" >Login</button>
+                <button type="submit" name="update" class="btn btn-lg btn-success" >Update</button>
               </div>
             </form>
           </div>
