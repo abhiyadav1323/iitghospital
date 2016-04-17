@@ -1,13 +1,23 @@
+<!-- <br><br><br><br><br><br><br><br><br> -->
 <?php
 session_start();
 include_once 'dbconnect.php';
     if(!isset($_SESSION['id']))
-        header("Location: index.html");
+        header("Location: index.php");
 
+    if(isset($_GET['del']))
+      {
+        $del=$_GET['del'];
+        //echo $del;
+        $del_query = "DELETE FROM queue WHERE id = '$del'";
+        $del_result = mysqli_query($conn,$del_query);
+        //echo $del_result;
+      }
     if(isset($_POST['register']))
     {
-        $idofpatient = $_POST['roll'];
-        $query = "SELECT 4 FROM patients WHERE roll = '$idofpatient'";
+        $idofpatient = mysqli_real_escape_string($conn,test_input($_POST['roll']));
+        //echo $idofpatient;
+        $query = "SELECT * FROM patients WHERE roll = '$idofpatient'";
         $result = mysqli_query($conn,$query);
         $row_cnt = mysqli_num_rows($result);
         if($row_cnt==0)
@@ -22,8 +32,13 @@ include_once 'dbconnect.php';
             header("Location: view_details.php");
         }
     }
-    
-
+    function test_input($data) 
+  {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  } 
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +113,7 @@ include_once 'dbconnect.php';
                                                                     <tbody>
                                                                     <tr>
                                                                         <th>Patient ID</th>
-                                                                        <th>Name of Patient</th>
+                                                                        <th class="text-center">Name of Patient</th>
                                                                     </tr>
                                                                     <?php
                                                                     $name=$row["name"];
@@ -115,7 +130,10 @@ include_once 'dbconnect.php';
                                                                             $run1 = mysqli_query($conn,$query2);
                                                                             $row2=mysqli_fetch_assoc($run1);
                                                                             ?>
-                                                                            <td><?php echo $row2["name"]; ?></td>
+                                                                            <td class="text-center"><?php echo $row2["name"]; ?></td>
+                                                                            <td><a href="staff_recep.php<?php echo "?del=".$row1["id"];?>">
+                                                                                <button class="label label-danger btn btn-xs">Delete</button></a>
+                                                                            </td>
                                                                         </tr>
                                                                         <?php
                                                                     }
@@ -170,7 +188,7 @@ include_once 'dbconnect.php';
                 <?php
                 if(isset($_POST['search']))
                 {
-                    $tobesearched = $_POST["partofname"];
+                    $tobesearched = mysqli_real_escape_string($conn,test_input($_POST["partofname"]));
                     $query = "SELECT * from patients WHERE name LIKE '%$tobesearched%'";
                     $query_run = mysqli_query($conn,$query);
                     if(!$query_run)

@@ -17,9 +17,9 @@ if(isset($_POST['register']))
     $phone = mysqli_real_escape_string($conn,test_input($_POST['phone']));
     $roll = mysqli_real_escape_string($conn,test_input($_POST['roll']));
 
-    $slquery = "SELECT 4 FROM patients WHERE roll = '$roll'";
+    $slquery = "SELECT * FROM patients WHERE roll = '$roll'";
     $selectresult = mysqli_query($conn,$slquery);
-    $query = "SELECT 7 FROM staff WHERE email = '$email'";
+    $query = "SELECT * FROM patients WHERE email = '$email'";
     $result = mysqli_query($conn,$query);
     $sql="INSERT INTO patients (name, dob, roll, phone, gender, email) VALUES ('$name', '$dob', '$roll', '$phone', '$gender', '$email')";
     if(mysqli_num_rows($selectresult)>0)
