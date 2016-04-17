@@ -15,9 +15,9 @@ include_once 'dbconnect.php';
       }
     if(isset($_POST['register']))
     {
-        $idofpatient = mysqli_real_escape_string($conn,test_input($_POST['roll']));
+        $idofpatient = mysqli_real_escape_string($conn,test_input($_POST['username']));
         //echo $idofpatient;
-        $query = "SELECT * FROM patients WHERE roll = '$idofpatient'";
+        $query = "SELECT * FROM patients WHERE username = '$idofpatient'";
         $result = mysqli_query($conn,$query);
         $row_cnt = mysqli_num_rows($result);
         if($row_cnt==0)
@@ -112,7 +112,7 @@ include_once 'dbconnect.php';
                                                                 <table class="table table-condensed">
                                                                     <tbody>
                                                                     <tr>
-                                                                        <th>Patient ID</th>
+                                                                        <th>Username</th>
                                                                         <th class="text-center">Name of Patient</th>
                                                                     </tr>
                                                                     <?php
@@ -126,7 +126,7 @@ include_once 'dbconnect.php';
                                                                             <td><?php echo $row1['pid'];?></td>
                                                                             <?php
                                                                             $id=$row1["pid"];
-                                                                            $query2 = "SELECT * from patients WHERE roll='$id'";
+                                                                            $query2 = "SELECT * from patients WHERE username='$id'";
                                                                             $run1 = mysqli_query($conn,$query2);
                                                                             $row2=mysqli_fetch_assoc($run1);
                                                                             ?>
@@ -210,7 +210,7 @@ include_once 'dbconnect.php';
                             Name of Patient
                         </th>
                         <th>
-                            ID
+                            Username
                         </th>
                     </tr>
                         <?php
@@ -227,7 +227,7 @@ include_once 'dbconnect.php';
                                     <?php echo $row["name"]; ?>
                                 </td>
                                 <td>
-                                    <?php echo $row["roll"]; ?>
+                                    <?php echo $row["username"]; ?>
                                 </td>
                             </tr>
                         <?php
@@ -262,9 +262,9 @@ include_once 'dbconnect.php';
         <div class="panel-body">
             <form class="form-horizontal" role="form" method="post" action="staff_recep.php">
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="roll">Patient Id:</label>
+                    <label class="control-label col-sm-4" for="username">Patient Username:</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" name="roll" required id="roll">
+                        <input type="text" class="form-control" name="username" required id="username">
                     </div>
                 </div>
                 <div class="form-group">

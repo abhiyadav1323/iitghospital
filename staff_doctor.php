@@ -47,7 +47,7 @@ if(!isset($_SESSION['id']))
                 <table class="table table-condensed table-striped">
                     <tbody><tr>
                         <th>S.No.</th>
-                        <th>ID</th>
+                        <th>Username</th>
                         <th>Name of Patients</th>
                     </tr>
                     <?php
@@ -64,20 +64,20 @@ if(!isset($_SESSION['id']))
                     {
                         $i+=1;
                         $id=$row1["pid"];
-                        $query2 = "SELECT * from patients WHERE roll='$id'";
+                        $query2 = "SELECT * from patients WHERE username='$id'";
                         $run1 = mysqli_query($conn,$query2);
                         $row2=mysqli_fetch_assoc($run1);
                         if($i==1)
                         {
                             $currpatname=$row2["name"];
-                            $currpatid=$row2["roll"];
-                            $_SESSION["patient_id"]=$row2["roll"];
+                            $currpatid=$row2["username"];
+                            $_SESSION["patient_id"]=$row2["username"];
                         }
 
                     ?>
                     <tr>
                         <td><?php echo $i; ?></td>
-                        <td><?php echo $row2["roll"] ?></td>
+                        <td><?php echo $row2["username"] ?></td>
                         <td><?php echo $row2["name"] ?></td>
                     </tr>
                     <?php
@@ -100,7 +100,7 @@ if(!isset($_SESSION['id']))
                 {
                     ?>
                     <div class="col-sm-12">
-                    <label class="control-label col-sm-6">Patient Id:</label>
+                    <label class="control-label col-sm-6">Username:</label>
                     <label class="control-label col-sm-6"><?php echo $currpatid; ?></label>
                     </div>
                     <div class="col-sm-12">

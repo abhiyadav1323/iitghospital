@@ -1,3 +1,4 @@
+<!-- <br><br><br><br><br><br><br><br> -->
 <?php
 session_start();
 if(!isset($_SESSION['id']))
@@ -11,12 +12,24 @@ if(isset($_POST['update']))
     $dob = mysqli_real_escape_string($conn,test_input($_POST['dob']));
     $gender= mysqli_real_escape_string($conn,test_input($_POST['gender']));
     $phone = mysqli_real_escape_string($conn,test_input($_POST['phone']));
-    $username = mysqli_real_escape_string($conn,test_input($_POST['username']));
-    $password = md5(mysqli_real_escape_string($conn,test_input($_POST['password'])));
-    $id = $_SESSION['id'];
-    $query = "UPDATE patients SET name='$name', email='$email', dob='$dob', gender='$gender', phone='$phone', username='$username' WHERE id='$id'";
-    $result = mysqli_query($conn,$query);
-    header('Location: patient.php');
+    //$username = mysqli_real_escape_string($conn,test_input($_POST['username']));
+    //$password = md5(mysqli_real_escape_string($conn,test_input($_POST['password'])));
+    if($_POST['page']=="1")
+    {
+        $id = $_SESSION['patient_id'];
+        $query = "UPDATE patients SET name='$name', email='$email', dob='$dob', gender='$gender', phone='$phone' WHERE username='$id'";
+        $result = mysqli_query($conn,$query);
+        header('Location: view_details.php');
+    }
+    else
+    {
+        $id = $_SESSION['id'];
+        $query = "UPDATE patients SET name='$name', email='$email', dob='$dob', gender='$gender', phone='$phone' WHERE id='$id'";
+        $result = mysqli_query($conn,$query);
+        header('Location: patient.php');
+    }
+    //echo $_POST['page'];
+    //header('Location: patient.php');
 }
 
 function test_input($data)

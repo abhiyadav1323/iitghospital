@@ -20,8 +20,8 @@ if(isset($_POST['register']))
 
     $slquery = "SELECT * FROM patients WHERE username = '$username'";
     $selectresult = mysqli_query($conn,$slquery);
-    $query = "SELECT * FROM patients WHERE email = '$email'";
-    $result = mysqli_query($conn,$query);
+    // $query = "SELECT * FROM patients WHERE email = '$email'";
+    // $result = mysqli_query($conn,$query);
     $sql="INSERT INTO patients (name, username, password, dob, phone, gender, email) VALUES ('$name', '$username', '$password', '$dob', '$phone', '$gender', '$email')";
     if(mysqli_num_rows($selectresult)>0)
     {
@@ -31,13 +31,6 @@ if(isset($_POST['register']))
         <?php
     }
     
-    else if(mysqli_num_rows($result)>0)
-    {
-        $email="";
-        ?>
-        <script>alert('Email already exists');</script>
-        <?php
-    }
     else if(mysqli_query($conn,$sql))
     {
         $path = '/var/www/html/patients/'.$username.'/';

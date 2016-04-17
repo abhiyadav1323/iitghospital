@@ -9,7 +9,7 @@ if(!isset($_SESSION['id']))
     else
     {
     $id=$_SESSION['patient_id'];
-         $query2 = "SELECT * from patients WHERE roll='$id'";
+         $query2 = "SELECT * from patients WHERE username='$id'";
                         $run1 = mysqli_query($conn,$query2);
                         $row2=mysqli_fetch_assoc($run1);
     }

@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 include_once 'dbconnect.php';
 if(!isset($_SESSION['id']))
@@ -8,7 +7,7 @@ else if(!isset($_SESSION['patient_id']))
     header("Location: staff_recep.php");
 if(isset($_SESSION['patient_id'])) {
     $idofpatient = $_SESSION["patient_id"];
-    $query = "SELECT * from patients WHERE roll='$idofpatient'";
+    $query = "SELECT * from patients WHERE username='$idofpatient'";
     $query_run = mysqli_query($conn, $query);
     if (!$query_run)
         $err = 'The query is invalid!' . ' ' . mysql_error() . ' ' . $query;
@@ -19,7 +18,7 @@ if(isset($_SESSION['patient_id'])) {
         $dob = $row["dob"];
         $gender = $row["gender"];
         $phone = $row["phone"];
-        $roll = $row["roll"];
+        $username = $row["username"];
 
         //echo $name . $email . $dob . $gender . $phone . $roll;
     }
@@ -67,42 +66,123 @@ if(isset($_SESSION['patient_id'])) {
     </nav>
 </div>
 
-<div class="row" style="padding-top: 8%; padding-left: 5%">
-
-    <div class="col-sm-4">
-
+<div class="row" style="padding-top: 5%">
+    <div class="col-sm-5" style="padding-top: 8%; padding-left: 10%">
         <!-- Profile Image -->
         <div class="panel panel-primary">
+            <div class="panel-title">
+        <h2 style="color: #8a6d3b"><center><b>Profile</b></center></h2>
+      </div>
             <div class="panel-body">
-                <center>
-                    <img class="profile-user-img img-responsive img-circle"  style="height: 200px; width: 200px" src="hospital_photos/small_5.jpg" alt="User profile picture">
-                </center>
-                <h3 class="profile-username text-center"><?php echo $name; ?></h3>
-
-                <p class="text-muted text-center">Patient</p>
-
-                <ul class="list-group list-group-unbordered">
-                    <li class="list-group-item">
-                        <b>Email</b> <a class="pull-right"><?php echo $email; ?></a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Date of Birth</b> <a class="pull-right"><?php echo date_format(date_create($dob), 'd/m/Y'); ?></a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Gender</b> <a class="pull-right"><?php echo ucfirst($gender); ?></a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Mobile</b> <a class="pull-right"><?php echo $phone ; ?></a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Roll Number</b> <a class="pull-right"><?php echo $roll; ?></a>
-                    </li>
-                </ul>
+                <table class="table table-condensed">
+                  <tbody>
+                    <tr>
+                      <td><b>Name:</b></td>
+                      <td><?php echo $row["name"]; ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Username:</b></td>
+                      <td><?php echo $row["username"]; ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Email:<b></td>
+                      <td><?php echo $row["email"]; ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Date of Birth:</b></td>
+                      <td><?php echo date_format(date_create($row["dob"]), 'd/m/Y'); ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Gender:</b></td>
+                      <td><?php echo ucfirst($row["gender"]); ?></td> 
+                    </tr>
+                    <tr>
+                      <td><b>Phone:</b></td>
+                      <td><?php echo ucfirst($row["phone"]); ?></td> 
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="form-group">
+                    <div class="col-sm-12"><center>
+                        <button type="button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#update">Update Details</button>
+                    </center>
+                    </div>
+                </div>
             </div>
             <!-- /.box-body -->
         </div>
         <!-- /.box -->
-</div>
+    </div>
+
+    <div id="update" class="modal fade" role="dialog">
+        <div class="modal-dialog ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 style="color: #8a6d3b"><center><b>Update Details</b></center></h2>
+            </div>
+            <form class="form-horizontal" role="form" action = "update.php" method="post">
+              <input type="hidden" value="1" name="page" />
+              <div class="form-group">
+                        <label class="control-label col-sm-3" for="name">Name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="name" required value="<?php echo $name;?>" id="nm">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3 disable" for="username">Username:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="username" disabled required value="<?php echo $username;?>" id="username" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Email:</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" name="email" required value="<?php echo $email;?>" id="email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="phone">Mobile:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="phone" class="form-control" value="<?php echo $phone;?>" required id="phone" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="dob">Date of Birth:</label>
+                        <div class="col-sm-8">
+                            <input type="date" class="form-control" name="dob" value="<?php echo $dob; ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="gender">Gender:</label>
+                        <div class="col-sm-8">
+                            <label class="radio-inline">
+                                <input type="radio" id="gender" name="gender" required value="female" <?php if(isset($gender) && $gender=="female") echo "checked"; ?>>Female</label>
+                            <label class="radio-inline">
+                                <input type="radio" id="gender" name="gender" required value="male" <?php if(isset($gender) && $gender=="male") echo "checked"; ?>>Male</label>
+                            <label class="radio-inline">
+                                <input type="radio" id="gender" name="gender" required value="other" <?php if(isset($gender) && $gender=="other") echo "checked"; ?>>Other</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-lg pull-left" data-dismiss="modal">Cancel</button>
+                <button type="submit" name="update" class="btn btn-lg btn-success" >Update</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+
+
+    
+
     <div class="col-sm-5 pull-right" style="padding-right: 10%; padding-top: 8%">
         <div class="panel panel-primary">
             <div class="panel-body">

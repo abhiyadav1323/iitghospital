@@ -112,7 +112,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="username">Username:</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="username" required value="<?php echo $username;?>" id="username" />
+                            <input type="text" class="form-control" disabled name="username" required value="<?php echo $username;?>" id="username" />
                         </div>
                     </div>
 
