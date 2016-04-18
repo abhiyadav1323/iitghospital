@@ -120,7 +120,7 @@ if(isset($_SESSION['patient_id'])) {
             <div class="modal-header">
               <h2 style="color: #8a6d3b"><center><b>Update Details</b></center></h2>
             </div>
-            <form class="form-horizontal" role="form" action = "update.php" method="post">
+            <form class="form-horizontal" role="form" action = "update.php" method="post"><br>
               <input type="hidden" value="1" name="page" />
               <div class="form-group">
                         <label class="control-label col-sm-3" for="name">Name:</label>

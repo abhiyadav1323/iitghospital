@@ -100,7 +100,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h2 style="color: #8a6d3b"><center><b>Update Details</b></center></h2>
-            </div>
+            </div><br>
             <form class="form-horizontal" role="form" action = "update.php" method="post">
               <div class="form-group">
                         <label class="control-label col-sm-3" for="nm">Name:</label>

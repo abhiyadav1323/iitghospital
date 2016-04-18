@@ -272,13 +272,7 @@ include_once 'dbconnect.php';
                         <button type="submit" name="register" class="btn btn-lg btn-success">View Details</button>
                     </div>
                 </div>
-                <div class="form-group-lg">
-                    <label class="control-label col-sm-9">Not Yet Registered?</label>
-                    <label class="control-label col-sm-8">
-                        <a href="patient_register.php">Register Here</a>
-                    </label>
-
-                </div>
+                
             </form>
         </div>
 

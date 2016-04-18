@@ -69,7 +69,7 @@
 
 
 
-    <div class="col-sm-4 pull-right" style="padding-right: 6%; padding-top: 12%">
+    <div class="col-sm-4 pull-right" style="padding-right: 6%; padding-top: 8%">
 
       <div class="panel panel-success">
         <div class="panel-body">
@@ -82,7 +82,10 @@
               <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#office">
               Login for Office Staff</button>
               <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#patient">
-              Login for Patients</button>
+              Login for Patients</button><br>
+              <a href="patient_register.php">
+              <button type="button" class="btn btn-block btn-warning btn-lg">
+              Registration for Patients</button></a>
         
       </div>
         </div>
