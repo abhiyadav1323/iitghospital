@@ -1,10 +1,4 @@
 <?php
-session_start();
-
-if(!isset($_SESSION['id']))
-{
-    header("Location: index.html");
-}
 include_once 'dbconnect.php';
 
 $name=$email=$phone=$dob=$gender=$username=$password="";
@@ -35,7 +29,7 @@ if(isset($_POST['register']))
     {
         $path = '/var/www/html/patients/'.$username.'/';
         mkdir($path);
-        header("Location: staff_recep.php");
+        header("Location: index.php");
     }
     else
     {
@@ -76,7 +70,7 @@ function test_input($data)
     <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="staff_recep.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+                <a class="navbar-brand" href="index.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
             </div>
         </div>
     </nav>
@@ -84,7 +78,7 @@ function test_input($data)
 <div class="row" style="padding-top: 4%">
 </div>
 <div class="row">
-    <div class="col-sm-offset-3 col-sm-6" style="padding-top: 3%; padding-bottom: 2%">
+    <div class="col-sm-offset-3 col-sm-6" style="padding-top: 5%; padding-bottom: 2%">
         <div class="panel panel-danger" >
             <div class="panel-title">
                 <h2 style="color: #66512c;"><center><b>Register Here</b></center></h2></div>
@@ -153,12 +147,7 @@ function test_input($data)
                         </div>
                     </div>
 
-                    <div class="form-group-lg">
-                        <label class="control-label col-sm-6">Already Registered?</label>
-                        <label class="control-label">
-                            <a href="staff_recep.php">Take Appointment Here</a>
-                        </label>
-                    </div>
+                    
             </div>
             </form>
 
