@@ -1,26 +1,25 @@
-<br><br><br><br><br><br><br><br><br>
+<!-- <br><br><br><br><br><br><br><br><br> -->
 <?php 
     session_start();
     include_once 'dbconnect.php';
-if(!isset($_SESSION['id']))
-    header("Location: index.html");
+    if(!isset($_SESSION['id']))
+        header("Location: index.html");
     if(!isset($_SESSION['patient_id']))
-    header("Location: staff_doctor.php");
+        header("Location: staff_doctor.php");
     else
     {
-    $id=$_SESSION['patient_id'];
-         $query2 = "SELECT * from patients WHERE username='$id'";
-                        $run1 = mysqli_query($conn,$query2);
-                        $row2=mysqli_fetch_assoc($run1);
+        $id=$_SESSION['patient_id'];
+        $query = "SELECT * from patients WHERE username='$id'";
+        $run = mysqli_query($conn,$query);
+        $row = mysqli_fetch_assoc($run);
     }
-      /*if(isset($_POST['done']))
-        echo  "Diagnosis: ". $_POST["Diagnosis"] . "<br> Medicines " . $_POST["Medicine"] .  $_POST["Med1"] . $_POST["Med2"];*/
+     
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Diagnosis Page</title>
+    <title>Diagnosis Portal</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -32,36 +31,60 @@ if(!isset($_SESSION['id']))
     <script src="AdminLTE/js/app.js"></script>
 </head>
 <body>
-<div class="row" style="padding: 0px">
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="padding: 0px; height: 10%">
+<div class="row">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="staff_recep.php" style="font-size: xx-large; padding: 0px"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+                <a class="navbar-brand" href="staff_doctor.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a class="navbar-brand" href="logout.php?logout" style="font-size: large ; padding: 0px"><b>Logout</b></a></li>
+                <li><a class="navbar-brand" href="logout.php?logout" style="font-size: large"><b>Logout</b></a></li>
             </ul>
         </div>
     </nav>
 </div>
-<div class="small-box bg-yellow" style="padding: 0px">
-            <div class="inner">
-              <h4><?php echo ("Patient id :  ".$_SESSION['patient_id']);?></h4>
-              <h4><?php echo ("Name :   ".$row2["name"]);?></h4>
 
-              <h5><?php echo ("Gender : ". $row2["gender"]);?></h5>
-              <h5><?php echo ("Date of Birth : ". $row2["dob"]);?></h5>
-              <p>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2" style="padding-top: 8%">
+        <div class="panel panel-primary">
+            <div class="panel-title">
+                <h2 style="color: #8a6d3b"><center><b>Patient Details</b></center></h2>
             </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
+            <div class="panel-body">
+                <div class="col-sm-5">
+                    <div class="col-sm-12">
+                        <span class="text-right col-sm-6"><b>Username:</b></span>
+                        <span class="col-sm-6"><?php echo $row["username"]; ?></span>
+                    </div>
+                    <div class="col-sm-12"> 
+                        <span class="text-right col-sm-6"><b>Patient Name:</b></span>
+                        <span class="col-sm-6"><?php echo $row["name"]; ?></span>
+                    </div>
+                    <div class="col-sm-12">
+                        <span class="text-right col-sm-6"><b>Email:</b></span>
+                        <span class="col-sm-6"><?php echo $row["email"]; ?></span>
+                    </div>
+                    <div class="col-sm-12">
+                        <span class="text-right col-sm-6"><b>Gender:</b></span>
+                        <span class="col-sm-6"><?php echo ucfirst($row["gender"]); ?></span>
+                    </div>
+                    <div class="col-sm-12">
+                        <span class="text-right col-sm-6"><b>Phone:</b></span>
+                        <span class="col-sm-6"><?php echo $row["phone"]; ?></span>
+                    </div>
+                    <div class="col-sm-12">
+                        <span class="text-right col-sm-6"><b>Date of Birth:</b></span>
+                        <span class="col-sm-6"><?php echo date_format(date_create($row["dob"]), 'd/m/Y'); ?></span>
+                    </div>
+                </div>
+                <div class="pull-right col-sm-2">
+                    <center><img src="<?php echo '/../patients/'.$row["username"].'/profile.jpg';?>" class="profile-user-img img-responsive img-circle" 
+                style="height: 200px; width: 200px; padding-top: 3%"/></center>
+                </div>
             </div>
-            <a href="#" class="small-box-footer">
-              Medical History <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          </div>
-
-
+        </div>
+    </div>
+</div>
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
  <form action = "diagnosis.php"  method="POST" id = "form1">
  <label for="Diagnosis">Diagnosis</label>

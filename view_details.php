@@ -67,9 +67,11 @@ if(isset($_SESSION['patient_id'])) {
 </div>
 
 <div class="row" style="padding-top: 5%">
-    <div class="col-sm-5" style="padding-top: 8%; padding-left: 10%">
+    <div class="col-sm-5" style="padding-top: 3%; padding-left: 10%">
         <!-- Profile Image -->
         <div class="panel panel-primary">
+            <center><img src="<?php echo '/../patients/'.$row["username"].'/profile.jpg';?>" class="profile-user-img img-responsive img-circle" 
+                style="height: 200px; width: 200px; padding-top: 3%"/></center>
             <div class="panel-title">
         <h2 style="color: #8a6d3b"><center><b>Profile</b></center></h2>
       </div>

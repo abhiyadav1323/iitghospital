@@ -1,4 +1,4 @@
-<br><br><br><br><br><br><br><br>
+<!-- <br><br><br><br><br><br><br><br> -->
 <?php
 session_start();
 if(!isset($_SESSION['id']))

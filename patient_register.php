@@ -1,7 +1,9 @@
+<!-- <br><br><br><br><br><br><br><br><br> -->
 <?php
+session_start();
 include_once 'dbconnect.php';
 
-$name=$email=$phone=$dob=$gender=$username=$password="";
+$name=$email=$phone=$dob=$gender=$username=$password=$cpassword="";
 if(isset($_POST['register']))
 {
     $name = mysqli_real_escape_string($conn,test_input($_POST['name']));
@@ -10,13 +12,21 @@ if(isset($_POST['register']))
     $gender= mysqli_real_escape_string($conn,test_input($_POST['gender']));
     $phone = mysqli_real_escape_string($conn,test_input($_POST['phone']));
     $username = mysqli_real_escape_string($conn,test_input($_POST['username']));
+    $cpassword = md5(mysqli_real_escape_string($conn,test_input($_POST['cpassword'])));
     $password = md5(mysqli_real_escape_string($conn,test_input($_POST['password'])));
+
+    $dir = "/var/www/html/patients/";
+    $f = $dir . $username . '/' . basename($_FILES["profile"]["name"]);
+    $imageFileType = pathinfo($f,PATHINFO_EXTENSION);
+    $file = $dir . $username . '/profile.' . $imageFileType;
+    $check = getimagesize($_FILES["profile"]["tmp_name"]);
 
     $slquery = "SELECT * FROM patients WHERE username = '$username'";
     $selectresult = mysqli_query($conn,$slquery);
     // $query = "SELECT * FROM patients WHERE email = '$email'";
     // $result = mysqli_query($conn,$query);
-    $sql="INSERT INTO patients (name, username, password, dob, phone, gender, email) VALUES ('$name', '$username', '$password', '$dob', '$phone', '$gender', '$email')";
+    $sql="INSERT INTO patients (name, username, password, dob, phone, gender, email, file) VALUES ('$name', '$username', '$password', '$dob', '$phone', '$gender', '$email', '$file')";
+    
     if(mysqli_num_rows($selectresult)>0)
     {
         $username="";
@@ -25,22 +35,60 @@ if(isset($_POST['register']))
         <?php
     }
     
+    else if($password != $cpassword)
+    {
+    ?>
+      <script>alert('Password and Confirm password mismatch');</script>
+    <?php
+    }
+
+    else if($check === false) {?>
+        <script>alert("File is not an image.")</script>
+        <?php
+    
+    } 
+    
+    else if ($_FILES["profile"]["size"] > 500000) {?>
+        <script>alert('Sorry, your file is too large.')</script>
+        <?php
+    }
+    
+    else if($imageFileType != "jpg" ) {?>
+        <script>alert('Sorry, only JPG files are allowed.')</script>
+        <?php
+    }
+
     else if(mysqli_query($conn,$sql))
     {
         $path = '/var/www/html/patients/'.$username.'/';
         mkdir($path);
-        header("Location: index.php");
+        chmod($path, 0777);
+        if (move_uploaded_file($_FILES["profile"]["tmp_name"], $file)) {
+            chmod($file, 0777);
+            $slquery = "SELECT * FROM patients WHERE username = '$username'";
+            $selectresult = mysqli_query($conn,$slquery);
+            $row = mysqli_fetch_assoc($selectresult);
+            $_SESSION['id'] = $row["id"];
+            // echo $_SESSION['id'];
+            header("Location: patient.php");
+        } 
+        else {?>
+        <script>alert('Sorry, there was an error uploading your file.')</script>
+        <?php
+        $del_query = "DELETE FROM patients WHERE username = '$username'";
+        $del_result = mysqli_query($conn,$del_query);
+        }
     }
     else
     {
-        $name=$email=$phone=$dob=$gender=$username=$password="";
+        $name=$email=$phone=$dob=$gender=$username=$password=$cpassword="";
         ?>
         <script>alert('Error while registering you...');</script>
         <?php
     }
 }
 else if(isset($_POST['reset']))
-    $name=$email=$phone=$dob=$gender=$username=$password="";
+    $name=$email=$phone=$dob=$gender=$username=$password=$cpassword="";
 
 function test_input($data)
 {
@@ -75,7 +123,7 @@ function test_input($data)
         </div>
     </nav>
 </div>
-<div class="row" style="padding-top: 4%">
+<div class="row" style="padding-top: 3%">
 </div>
 <div class="row">
     <div class="col-sm-offset-3 col-sm-6" style="padding-top: 5%; padding-bottom: 2%">
@@ -83,7 +131,7 @@ function test_input($data)
             <div class="panel-title">
                 <h2 style="color: #66512c;"><center><b>Register Here</b></center></h2></div>
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="post" action="patient_register.php">
+                <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="patient_register.php">
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="nm">Name:</label>
                         <div class="col-sm-8">
@@ -101,7 +149,14 @@ function test_input($data)
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="password">Password:</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" name="password" required value="<?php echo $password;?>" id="password" />
+                            <input type="password" class="form-control" name="password" required id="password" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="cpassword">Confirm Password:</label>
+                        <div class="col-sm-8">
+                          <input type="password" class="form-control" name="cpassword" required id="cpassword" >
                         </div>
                     </div>
 
@@ -137,6 +192,15 @@ function test_input($data)
                                 <input type="radio" id="gender" name="gender" required value="other" <?php if(isset($gender) && $gender=="other") echo "checked"; ?>>Other</label>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="dob">Profile Picture: (only .jpg files)</label>
+
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" name="profile" required>
+                        </div>
+                    </div>
+                    
                     <br>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-3">
