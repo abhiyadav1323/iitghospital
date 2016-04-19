@@ -1,7 +1,7 @@
 <?php
 	$uname='root';
 	$host='localhost';
-	$pass='8787';
+	$pass='$unny01';
 	$db='iitghospital';
 
 	$conn=mysqli_connect($host,$uname,$pass,$db);
