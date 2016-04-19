@@ -1,0 +1,28 @@
+{
+	"doctor": "Iamdoctor",
+	"date": "10/10/10",
+	"gender": "Male",
+	"time": "5:45",
+	"number_of_medicines": "2",
+	"patient_username":"VistaarJ",
+	"patient_name":"Vistaar Juneja",
+	"prescription": 
+
+	[
+
+		{
+			"quantity":"5 tablets",
+			"name_of_medicine": "Levodopa",
+			"basic_information": "After meal",
+			"frequency": "two times a day"
+		},
+
+		{
+			"quantity":"3 tablets",
+			"name_of_medicine": "Paracetamol",
+			"basic_information": "Before meal",
+			"frequency": "three times a day"
+		}
+	]
+
+}
