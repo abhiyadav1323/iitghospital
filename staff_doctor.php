@@ -3,6 +3,11 @@ session_start();
 include_once 'dbconnect.php';
 if(!isset($_SESSION['id']))
     header("Location: index.html");
+
+$id=$_SESSION['id'];
+$slquery="SELECT * from staff WHERE id='$id'";
+$query_run = mysqli_query($conn,$slquery);
+$row=mysqli_fetch_assoc($query_run);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +30,7 @@ if(!isset($_SESSION['id']))
     <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+                <a class="navbar-brand" href="staff_doctor.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="navbar-brand" href="logout.php?logout" style="font-size: large"><b>Logout</b></a></li>
@@ -34,7 +39,10 @@ if(!isset($_SESSION['id']))
     </nav>
 </div>
 
-<div class="row" style="padding-top: 8%">
+<div class="row" style="padding-top: 5%; padding-bottom: 1%">
+    <div class="col-sm-12"><center>
+        <h1><label class="label label-info"><?php echo 'Hello,'.' '.$row['name']; ?></label></h1>
+    </center></div>
 </div>
 <div class="row" style="padding-left: 3%">
     <div class="col-sm-4">
@@ -51,10 +59,6 @@ if(!isset($_SESSION['id']))
                         <th>Name of Patients</th>
                     </tr>
                     <?php
-                    $id=$_SESSION['id'];
-                    $slquery="SELECT * from staff WHERE id='$id'";
-                    $query_run = mysqli_query($conn,$slquery);
-                    $row=mysqli_fetch_assoc($query_run);
                     $name=$row["name"];
                     $query1 = "SELECT * from queue WHERE name='$name'";
                     $run = mysqli_query($conn,$query1);

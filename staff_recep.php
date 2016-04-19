@@ -39,6 +39,10 @@ include_once 'dbconnect.php';
     $data = htmlspecialchars($data);
     return $data;
   } 
+  $id=$_SESSION['id'];
+$slquery="SELECT * from staff WHERE id='$id'";
+$query_run = mysqli_query($conn,$slquery);
+$row=mysqli_fetch_assoc($query_run);
 ?>
 
 <!DOCTYPE html>
@@ -69,14 +73,20 @@ include_once 'dbconnect.php';
     </nav>
 </div>
 
-<div class="row" style="padding-top: 8%">
+<div class="row" style="padding-top: 5%; padding-bottom: 1%">
+    <div class="col-sm-12"><center>
+        <h1><label class="label label-info"><?php echo 'Hello,'.' '.$row['name']; ?></label></h1>
+    </center></div>
+</div>
+
+<div class="row" style="padding-top: 1%">
     <div class="col-sm-4" style="padding-left: 3%">
         <div class="panel panel-primary">
             <div class="panel-title">
                 <h2 style="color: #8a6d3b"><center><b>List of Doctors</b></center></h2>
             </div>
             <!-- /.box-header -->
-            <div class="panel-body" style="overflow-y: scroll; height: 70vh;">
+            <div class="panel-body" style="overflow-y: scroll; height: 60vh;">
                 <ul class="todo-list ui-sortable table-striped">
                     <?php
                         $post="doctor";

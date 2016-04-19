@@ -1,3 +1,4 @@
+<!-- <br><br><br><br><br><br><br><br><br> -->
 <?php
   session_start();
   include_once 'dbconnect.php';
@@ -37,7 +38,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="staff_recep.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+                <a class="navbar-brand" href="patient.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="navbar-brand" href="logout.php?logout" style="font-size: large"><b>Logout</b></a></li>
@@ -169,7 +170,7 @@
             <div class="panel-title">
         <h2 style="color: #8a6d3b"><center><b>Medical History</b></center></h2>
       </div>
-            <div class="panel-body" style="overflow-y: scroll; height: 60vh;">
+            <div class="panel-body" style="overflow-y: scroll; height: 70vh;">
                 <table class="table table-condensed">
                   <tbody>
                     <?php
@@ -184,7 +185,7 @@
                         ?>
                         <tr>
                             <td><?php echo $i+1; ?>.</td>
-                            <td><?php echo $files[0]; ?></td>
+                            <td><?php echo $files[$i]; ?></td>
                         </tr>
                         <?php
                     }
