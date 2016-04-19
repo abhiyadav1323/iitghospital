@@ -89,7 +89,7 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-4" style="padding-top: 1%; padding-left: 3%">
+    <div class="col-sm-3" style="padding-top: 1%; padding-left: 3%">
     <!-- Profile Image -->
     <div class="panel panel-primary">
         <div class="panel-title">
@@ -123,87 +123,74 @@
     <!-- /.box -->
     </div>
 
-    <div class="col-sm-8" style="padding-top: 1%; padding-right: 3%">
+    <div class="col-sm-9" style="padding-top: 1%; padding-right: 3%">
         <!-- Profile Image -->
         <div class="panel panel-primary">
             <div class="panel-title">
         <h2 style="color: #8a6d3b"><center><b>Diagnosis</b></center></h2>
       </div>
-            <div class="panel-body" style="overflow-y: scroll; height: 60vh;">
+      <form class="form-horizontal" role="form" method="post" action="encryption.php">
+            <div class="panel-body" style="overflow-y: scroll; height: 51vh;">
                 
+                    <table class="table table-condensed">
+                        <tbody class="field_wrapper">
+                            <a href="javascript:void(0);" class="add_button" title="Add field">
+                            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-plus"></i></button></a>
+                            <tr>
+                                <th class="text-center">S.No.</th>
+                                <th class="text-center">Name of Medicine</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Frequency</th>
+                                <th class="text-center">Basic Information</th>
+                            </tr>                            
+                        </tbody>
+                    </table>
             </div>
-            <!-- /.box-body -->
+                <div class="form-group">
+                    <div class="col-sm-12"><center>
+                        <button type="submit" name="submit" class="btn btn-lg btn-success">Submit</button>
+                    </center></div>
+                </div>
+            </form>
         </div>
-        <!-- /.box -->
-    </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
- <form action = "diagnosis.php"  method="POST" id = "form1">
- <label for="Diagnosis">Diagnosis</label>
-<textarea class="form-control" rows="5" placeholder="Rx." id = "Diagnosis" name = "Diagnosis"></textarea>
-
-
-<div class="field_wrapper">
-    <div>
-    <label for="Med[]">Medicines: </label>
-        <input  placeholder="Prescription" type="text" size = "100" name = "Med[]" value = ""/>
-                      
-        <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png" height="50" width="50" /></a>
     </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){
-    var max = 25; 
+$(document).ready(function(){ 
     var addButton = $('.add_button'); 
-    var fwrapper = $('.field_wrapper'); 
-    var x = 1; 
-    var fieldHTML = '<div><label for="Med[]">Medicines: </label> <input placeholder="Prescription" type="text" size = "100" name="Med[]" value ="" ><a href="javascript:void(0);" class="remove_button" title="Remove field"><img src="remove-icon.png" height="30" width="30"/></a></div>'; //New input field html for when add button is clicked
-    var x = 1; //Initial field counter is 1
+    var fwrapper = $('.field_wrapper');  
+    var fieldHTML;
+    var x = 0; 
     $(addButton).click(function(){ //Once add button is clicked
-        if(x < max){ //Check maximum number of input fields if not exceeded
             x++; //Increment field counter
+            fieldHTML ='<tr>'+
+    '<td class="text-center">'+x+'</td>'+
+    '<td  class="text-center"><input type="text" name="Med[name_med][]"></td>'+
+    '<td  class="text-center"><input type="number" name="Med[quantity_med][]"></td>'+
+    '<td  class="text-center"><input type="text" name="Med[frequency_med][]"></td>'+
+    '<td  class="text-center"><textarea type="text" name="Med[info_med][]"></textarea></td>'+
+    '</tr>';
             $(fwrapper).append(fieldHTML); // Add field html
-        }
-    });
-    $(fwrapper).on('click', '.remove_button', function(e){ //Once remove button is clicked
-        e.preventDefault();
-        $(this).parent('div').remove(); //Remove field html
-        x--; //Decrement field counter
+
     });
 });
 </script>
-<button type="submit" form="form1" value="Submit" name = "done">Submit</button>
-</form>
-<?php
-if(isset($_POST['done'])){
-$field_values_array = $_POST['Med'];
-foreach($field_values_array as $value){
-  echo " Medices $value <br>" ; 
-}
-}
 
 
-?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
