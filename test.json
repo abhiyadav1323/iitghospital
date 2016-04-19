@@ -1,0 +1,23 @@
+{
+	"doctor": "Iamdoctor",
+	"date": "10/10/10",
+	"time": "5:45",
+	"number_of_medicines": "2",
+	"prescription": 
+
+	[
+
+		{
+			"name_of_medicine": "Levodopa",
+			"basic_information": "After meal",
+			"frequency": "two times a day"
+		},
+
+		{
+			"name_of_medicine": "Paracetamol",
+			"basic_information": "Before meal",
+			"frequency": "three times a day"
+		}
+	]
+	
+}
