@@ -61,7 +61,7 @@ $myfile=fopen("abcd.html","w") or die("Unable to open file!");
 fwrite($myfile,$html);
 fclose($myfile);
 
-exec("xvfb-run -a /var/www/html/team1cs243/wkhtmltopdf abcd.html output6.pdf");
+exec("xvfb-run -a /var/www/html/phptest/wkhtmltopdf abcd.html output6.pdf");
 
 ?>
 
