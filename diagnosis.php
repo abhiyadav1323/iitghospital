@@ -12,6 +12,8 @@
         $query = "SELECT * from patients WHERE username='$id'";
         $run = mysqli_query($conn,$query);
         $row = mysqli_fetch_assoc($run);
+        $dir='/var/www/html/patients/'.$row['username'].'/';
+        $files = preg_grep('/^([^.])/', scandir($dir, 1));
     }
      
 ?>
@@ -45,13 +47,13 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-8 col-sm-offset-2" style="padding-top: 8%">
-        <div class="panel panel-primary">
+    <div class="col-sm-8 col-sm-offset-2" style="padding-top: 7%">
+        <div class="panel panel-success">
             <div class="panel-title">
                 <h2 style="color: #8a6d3b"><center><b>Patient Details</b></center></h2>
             </div>
             <div class="panel-body">
-                <div class="col-sm-5">
+                <div class="col-sm-5" style="padding-top: 2%">
                     <div class="col-sm-12">
                         <span class="text-right col-sm-6"><b>Username:</b></span>
                         <span class="col-sm-6"><?php echo $row["username"]; ?></span>
@@ -77,14 +79,87 @@
                         <span class="col-sm-6"><?php echo date_format(date_create($row["dob"]), 'd/m/Y'); ?></span>
                     </div>
                 </div>
-                <div class="pull-right col-sm-2">
+                <div class="pull-right col-sm-3">
                     <center><img src="<?php echo '/../patients/'.$row["username"].'/profile.jpg';?>" class="profile-user-img img-responsive img-circle" 
-                style="height: 200px; width: 200px; padding-top: 3%"/></center>
+                style="height: 150px; width: 150px;"/></center>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-sm-4" style="padding-top: 1%; padding-left: 3%">
+    <!-- Profile Image -->
+    <div class="panel panel-primary">
+        <div class="panel-title">
+    <h2 style="color: #8a6d3b"><center><b>Medical History</b></center></h2>
+  </div>
+        <div class="panel-body" style="overflow-y: scroll; height: 60vh;">
+            <table class="table table-condensed">
+              <tbody>
+                <?php
+                if(count($files)==0)
+                {
+                    ?>
+                    <center><h4>No medical history found!!</h4></center>
+                    <?php
+                }
+                for($i=0;$i<count($files);$i++)
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $i+1; ?>.</td>
+                        <td><?php echo $files[0]; ?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+              </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    </div>
+
+    <div class="col-sm-8" style="padding-top: 1%; padding-right: 3%">
+        <!-- Profile Image -->
+        <div class="panel panel-primary">
+            <div class="panel-title">
+        <h2 style="color: #8a6d3b"><center><b>Diagnosis</b></center></h2>
+      </div>
+            <div class="panel-body" style="overflow-y: scroll; height: 60vh;">
+                
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
  <form action = "diagnosis.php"  method="POST" id = "form1">
  <label for="Diagnosis">Diagnosis</label>
