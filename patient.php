@@ -195,6 +195,8 @@ const METHOD = 'aes-256-cbc';
                             <div class="modal-dialog ">
                               <div class="modal-content">
                                 <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">x</span></button>
                                   <h2 style="color: #8a6d3b"><center><b>Medical Receipt</b></center></h2>
                                 </div>
                                 <?php
