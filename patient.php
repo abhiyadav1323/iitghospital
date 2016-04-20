@@ -1,7 +1,7 @@
 <!-- <br><br><br><br><br><br><br><br><br> -->
 <?php
-const METHOD = 'aes-256-cbc';
   session_start();
+  const METHOD = 'aes-256-cbc';
   include_once 'dbconnect.php';
   if(!isset($_SESSION['id']))
     header("Location: index.php");
@@ -23,7 +23,7 @@ const METHOD = 'aes-256-cbc';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home Page - Receptionist</title>
+    <title>Home Page - Patient</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
