@@ -75,7 +75,7 @@ $row=mysqli_fetch_assoc($query_run);
                         {
                             $currpatname=$row2["name"];
                             $currpatid=$row2["username"];
-                            $_SESSION["patient_id"]=$row2["username"];
+                            $_SESSION["patient_id"]=$row2["username"];//session for one patient starts
                         }
 
                     ?>
