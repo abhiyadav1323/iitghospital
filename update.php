@@ -11,7 +11,7 @@ if(isset($_POST['update']))
     $email = mysqli_real_escape_string($conn,test_input($_POST['email']));
     $dob = mysqli_real_escape_string($conn,test_input($_POST['dob']));
     $gender= mysqli_real_escape_string($conn,test_input($_POST['gender']));
-    $phone = mysqli_real_escape_string($conn,test_input($_POST['phone']));
+    $phone = mysqli_real_escape_string($conn,test_input($_POST['phone'])); //taking input 
     //$username = mysqli_real_escape_string($conn,test_input($_POST['username']));
     //$password = md5(mysqli_real_escape_string($conn,test_input($_POST['password'])));
     if($_POST['page']=="1")
@@ -28,8 +28,9 @@ if(isset($_POST['update']))
         $result = mysqli_query($conn,$query);
         header('Location: patient.php');
     }
-    //echo $_POST['page'];
+    
     //header('Location: patient.php');
+    //echo $_POST['page'];
 }
 
 function test_input($data)
