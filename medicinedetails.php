@@ -27,7 +27,7 @@ if($result==null&&json_last_error()!=JSON_ERROR_NONE)
 {
 	echo "Incorrect data! "; // print incorrect data
 }
-else {$result_string = $result['results'][0]['indications_and_usage'][0];echo $result_string;}
+else {$result_string = $result['results'][0]['indications_and_usage'][0];echo $result_string;} // null
 //else echo "No such result!";
 
 
