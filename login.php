@@ -68,13 +68,13 @@ if(isset($_POST['username'])&&isset($_POST['password']))
 				{
 					$_SESSION['id'] = $row["id"];
 					if ($row["post"] == "doctor")
-						header("Location: staff_doctor.php");
+						header("Location: staff_doctor.php");  //redirect to staff doctor page 
 					else if ($row["post"] == "receptionist")
-						header("Location: staff_recep.php");
+						header("Location: staff_recep.php");   // redirect to staff reception page
 					else if ($row["post"] == "pharmacist")
-						header("Location: staff_pharma.php");
+						header("Location: staff_pharma.php");  // redirect to pharmecy 
 					else if ($row["post"] == "office")
-						header("Location: staff_office.php");
+						header("Location: staff_office.php");  // redirect to staff office 
 				}
 			}
 		}
