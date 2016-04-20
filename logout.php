@@ -7,7 +7,7 @@
 
 	if(isset($_GET['logout']))
 	{
-		session_destroy();
+		session_destroy(); 
 		unset($_SESSION['id']);
 		header("Location: index.php");
 	}
