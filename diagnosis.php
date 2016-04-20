@@ -20,6 +20,47 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<script>
+function checkNameValid(id)
+{
+    var elements = document.getElementsByClassName(id);
+    
+    var mediname =  elements[0].value;
+    if(mediname)
+    {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById(id).innerHTML = xmlhttp.responseText;
+            }
+        };
+        xmlhttp.open("GET", "checkifexists.php?medname=" + mediname + "&quantity=" + "notrequired", true);
+        xmlhttp.send(); 
+    }
+}
+
+function checkQuantityValid(id)
+{
+
+    var elements = document.getElementsByClassName(id);
+    
+    var mediname =  elements[0].value;
+    var quantity = elements[1].value;
+    if(mediname&&quantity)
+    {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("q"+id).innerHTML = xmlhttp.responseText;
+            }
+        };
+        xmlhttp.open("GET", "checkifexists.php?medname=" + mediname + "&quantity=" + quantity, true);
+        xmlhttp.send(); 
+    }
+}
+
+</script>
+
 <head>
     <title>Diagnosis Portal</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
@@ -165,10 +206,10 @@ $(document).ready(function(){
             x++; //Increment field counter
             fieldHTML ='<tr>'+
     '<td class="text-center">'+x+'</td>'+
-    '<td  class="text-center"><input type="text" name="Med[name_med][]"></td>'+
-    '<td  class="text-center"><input type="number" name="Med[quantity_med][]"></td>'+
-    '<td  class="text-center"><input type="text" name="Med[frequency_med][]"></td>'+
-    '<td  class="text-center"><textarea type="text" name="Med[info_med][]"></textarea></td>'+
+    '<td  class="text-center"><input type="text" class="'+x+'" name="Med[name_med][]" onblur="checkNameValid(this.className)"><span id="'+x+'"></span></td>'+
+    '<td  class="text-center"><input type="number" class="'+x+'" name="Med[quantity_med][]" onblur="checkQuantityValid(this.className)"><span id="q'+x+'"></span></td>'+
+    '<td  class="text-center"><input type="text" class="'+x+'" name="Med[frequency_med][]"></td>'+
+    '<td  class="text-center"><textarea type="text" class="'+x+'" name="Med[info_med][]"></textarea></td>'+
     '</tr>';
             $(fwrapper).append(fieldHTML); // Add field html
 
