@@ -12,7 +12,7 @@ $number_of_medicines=$json['number_of_medicines'];
 
 $name_of_patient=$json['patient_name'];
 $username_of_patient=$json['patient_username'];
-$gender=$json['gender'];
+$gender=$json['gender']; //taking input 
 
 $html =<<<EOD
 <html> 
