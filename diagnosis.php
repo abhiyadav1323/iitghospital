@@ -151,7 +151,7 @@ function checkQuantityValid(id)
                     ?>
                     <tr>
                         <td><?php echo $i+1; ?>.</td>
-                        <td><?php echo $files[0]; ?></td>
+                        <td><?php echo $files[$i]; ?></td>
                     </tr>
                     <?php
                 }
