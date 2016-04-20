@@ -12,7 +12,7 @@ hello this is abhishek yadav.
 software sucks.
 EOD;
 echo $textToEncrypt."<br>";
-$encryptionMethod = "AES-256-CBC";  // AES is used by the U.S. gov't to encrypt top secret documents.
+$encryptionMethod = "AES-256-CBC";  // AES method is used by  the U.S. gov't to encrypt top secret documents.
 $secretHash = "ankit";
 //$secretHash = strtohex($secretHash);
 echo $secretHash."<br>";
@@ -24,7 +24,7 @@ echo $secretHash."<br>";
   echo $ciphertext."<br>";
        
 
-  $fp = fopen( "/var/www/html/patients/a.txt","wb");
+  $fp = fopen( "/var/www/html/patients/a.txt","wb");//store  encrypted in another file 
   fwrite($fp,$ciphertext);
   fclose($fp);
   $fp = fopen( "/var/www/html/patients/a.txt","r");
@@ -32,7 +32,7 @@ echo $secretHash."<br>";
    $iv = mb_substr($ciphertext, 0, $ivsize, '8bit');
         $ciphertext = mb_substr($ciphertext, $ivsize, null, '8bit');
         
-  $temp=openssl_decrypt($ciphertext,METHOD,$secretHash,OPENSSL_RAW_DATA,$iv);
+  $temp=openssl_decrypt($ciphertext,METHOD,$secretHash,OPENSSL_RAW_DATA,$iv);//temp variable to store decrypt entities
   echo $temp."<br>";
 
   
