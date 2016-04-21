@@ -47,7 +47,11 @@
     chmod($file, 0777);   
     fwrite($fp,json_encode($med));//json data
     fclose($fp);
-    $del_query = "DELETE FROM queue WHERE pid = '$pat_id'";
+    $query = "SELECT * from queue WHERE pid='$pat_id'";
+    $run = mysqli_query($conn,$query);
+    $row = mysqli_fetch_assoc($run);
+    $queue_id = $row["id"];
+    $del_query = "DELETE FROM queue WHERE id = '$queue_id'";
     $del_result = mysqli_query($conn,$del_query);
     $sql="INSERT INTO pharma_queue (pid, reciept) VALUES ('$pat_id', '$file_name')";
     if(mysqli_query($conn,$sql))

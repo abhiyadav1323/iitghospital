@@ -141,12 +141,6 @@ function checkQuantityValid(id)
             <table class="table table-condensed">
               <tbody>
                 <?php
-                if(count($files)==1)
-                {
-                    ?>
-                    <center><h4>No medical history found!!</h4></center>
-                    <?php
-                }
                 for($i=0,$c=0;$i<count($files);$i++)
                 {
                     if(strpos($files[$i], '.json') !== false)
