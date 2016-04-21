@@ -97,6 +97,14 @@ The system can broadly be broken down into the following features:
     This module has the feature of printing medicine receipts which can be
     easily read by anyone opposed to the handwritten medicine receipt we get
     from IITG hospital now.
+    
+    
+    * Patient Module:
+  --------------------
+    
+    This module offers the patient to view their past medical records 
+    without coming to hospital by accesing the web app from their room.
+    They can also update their information from this portal.
 
 --------------------------------------------------------------------------------
 
