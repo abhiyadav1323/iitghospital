@@ -1,6 +1,7 @@
 <!-- <br><br><br><br><br><br><br><br><br> -->
 <?php 
     session_start();
+    const METHOD = 'aes-256-cbc';
     include_once 'dbconnect.php';
     if(!isset($_SESSION['id']))
         header("Location: index.html");
@@ -140,20 +141,139 @@ function checkQuantityValid(id)
             <table class="table table-condensed">
               <tbody>
                 <?php
-                if(count($files)==0)
+                if(count($files)==1)
                 {
                     ?>
                     <center><h4>No medical history found!!</h4></center>
                     <?php
                 }
-                for($i=0;$i<count($files);$i++)
+                for($i=0,$c=0;$i<count($files);$i++)
                 {
+                    if(strpos($files[$i], 'jpg') === false)
+                    {
+                        $c++;
                     ?>
                     <tr>
-                        <td><?php echo $i+1; ?>.</td>
+                        <td><?php echo $c; ?>.</td>
                         <td><?php echo $files[$i]; ?></td>
+                        <td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#view_med<?php echo $c; ?>">View</button>
+                            <div id="view_med<?php echo $c; ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog ">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">x</span></button>
+                                  <h2 style="color: #8a6d3b"><center><b>Medical Receipt</b></center></h2>
+                                </div>
+                                <?php
+                                $file_name = $files[$i];
+                                $file='/var/www/html/patients/'.$row["username"].'/'.$file_name;
+                                $fp = fopen( $file, "rb");
+                                $med = fread($fp,filesize($file));
+                                fclose($fp);
+                                $key = $row['password'];
+                                $med = json_decode($med, true);
+                                $med['doctor'] = utf8_decode((string)$med['doctor']);
+                                $ivsize = openssl_cipher_iv_length(METHOD);
+                                $iv = mb_substr($med['doctor'], 0, $ivsize, '8bit');
+                                $med['doctor'] = mb_substr($med['doctor'], $ivsize, null, '8bit');
+                                $med['doctor'] = openssl_decrypt($med['doctor'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                $med['date'] = utf8_decode($med['date']);
+                                $med['date'] = mb_substr($med['date'], $ivsize, null, '8bit');
+                                $med['date'] = openssl_decrypt($med['date'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                $med['time'] = utf8_decode($med['time']);
+                                $med['time'] = mb_substr($med['time'], $ivsize, null, '8bit');
+                                $med['time'] = openssl_decrypt($med['time'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                $med['number_of_medicines'] = utf8_decode($med['number_of_medicines']);
+                                $med['number_of_medicines'] = mb_substr($med['number_of_medicines'], $ivsize, null, '8bit');
+                                $med['number_of_medicines'] = openssl_decrypt($med['number_of_medicines'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                $med['patient_username'] = utf8_decode($med['patient_username']);
+                                $med['patient_username'] = mb_substr($med['patient_username'], $ivsize, null, '8bit');
+                                $med['patient_username'] = openssl_decrypt($med['patient_username'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                $med['patient_name'] = utf8_decode($med['patient_name']);
+                                $med['patient_name'] = mb_substr($med['patient_name'], $ivsize, null, '8bit');
+                                $med['patient_name'] = openssl_decrypt($med['patient_name'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                $med['diagnosis'] = utf8_decode($med['diagnosis']);
+                                $med['diagnosis'] = mb_substr($med['diagnosis'], $ivsize, null, '8bit');
+                                $med['diagnosis'] = openssl_decrypt($med['diagnosis'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                for($j=0;$j<$med['number_of_medicines'];$j++) 
+                                {
+                                    $med['prescription'][$j]['name_of_medicine'] = utf8_decode($med['prescription'][$j]['name_of_medicine']);
+                                    $med['prescription'][$j]['name_of_medicine'] = mb_substr($med['prescription'][$j]['name_of_medicine'], $ivsize, null, '8bit');
+                                    $med['prescription'][$j]['name_of_medicine'] = openssl_decrypt($med['prescription'][$j]['name_of_medicine'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                    $med['prescription'][$j]['quantity'] = utf8_decode($med['prescription'][$j]['quantity']);
+                                    $med['prescription'][$j]['quantity'] = mb_substr($med['prescription'][$j]['quantity'], $ivsize, null, '8bit');
+                                    $med['prescription'][$j]['quantity'] = openssl_decrypt($med['prescription'][$j]['quantity'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                    $med['prescription'][$j]['frequency'] = utf8_decode($med['prescription'][$j]['frequency']);
+                                    $med['prescription'][$j]['frequency'] = mb_substr($med['prescription'][$j]['frequency'], $ivsize, null, '8bit');
+                                    $med['prescription'][$j]['frequency'] = openssl_decrypt($med['prescription'][$j]['frequency'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                    $med['prescription'][$j]['basic_information'] = utf8_decode($med['prescription'][$j]['basic_information']);
+                                    $med['prescription'][$j]['basic_information'] = mb_substr($med['prescription'][$j]['basic_information'], $ivsize, null, '8bit');
+                                    $med['prescription'][$j]['basic_information'] = openssl_decrypt($med['prescription'][$j]['basic_information'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                }
+                                //var_dump($med);
+                                ?>
+                                <div class="modal-body" style="overflow-y: scroll; height: 75vh;">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-12">
+                                            <span class="text-right col-sm-6"><b>Doctor Name:</b></span>
+                                            <span class="col-sm-6"><?php echo $med['doctor']; ?></span>
+                                        </div>
+                                        <div class="col-sm-12"> 
+                                            <span class="text-right col-sm-6"><b>Date & Time:</b></span>
+                                            <span class="col-sm-6"><?php echo $med["date"].' &'.$med["time"]; ?></span>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <span class="text-right col-sm-6"><b>Patient Username:</b></span>
+                                            <span class="col-sm-6"><?php echo $med["patient_username"]; ?></span>
+                                        </div>
+                                        <div class="col-sm-12" style="padding-bottom: 2%">
+                                            <span class="text-right col-sm-6"><b>Patient Name:</b></span>
+                                            <span class="col-sm-6"><?php echo $med["patient_name"]; ?></span>
+                                        </div>
+                                        <hr style="border: solid">
+                                        <div class="col-sm-12">
+                                            <span class="text-right col-sm-2 text-middle"><b>Diagnosis:</b></span>
+                                            <span class="col-sm-10"><?php echo $med["diagnosis"]; ?></span>
+                                        </div>
+                                        <div class="col-sm-12" style="padding-bottom: 3%"></div>
+                                        <hr style="border: solid">
+                                        <table class="table table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="text-center">S.No.</th>
+                                                    <th class="text-center">Name of Medicine</th>
+                                                    <th class="text-center">Quantity</th>
+                                                    <th class="text-center">Frequency</th>
+                                                    <th class="text-center">Basic Information</th>
+                                                </tr>      
+                                        <?php
+                                            for($j=0;$j<$med['number_of_medicines'];$j++) 
+                                            {
+                                                ?>
+                                                <tr>
+                                                    <td class="text-center"><?php echo $j+1; ?></td>
+                                                    <td class="text-center"><?php echo $med['prescription'][$j]['name_of_medicine']; ?></td>
+                                                    <td class="text-center"><?php echo $med['prescription'][$j]['quantity']; ?></td>
+                                                    <td class="text-center"><?php echo $med['prescription'][$j]['frequency']; ?></td>
+                                                    <td class="text-center"><?php echo $med['prescription'][$j]['basic_information']; ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                          </div>
+                          </div>
+                          </div>
+                          </td>
                     </tr>
                     <?php
+                    }
                 }
                 ?>
               </tbody>
@@ -168,11 +288,13 @@ function checkQuantityValid(id)
         <!-- Profile Image -->
         <div class="panel panel-primary">
             <div class="panel-title">
-        <h2 style="color: #8a6d3b"><center><b>Diagnosis</b></center></h2>
+        <h2 style="color: #8a6d3b"><center><b>Prescription</b></center></h2>
       </div>
       <form class="form-horizontal" role="form" method="post" action="encryption.php">
             <div class="panel-body" style="overflow-y: scroll; height: 51vh;">
-                
+                <div class="col-sm-12">
+                    <center><textarea type="text" name="diagnosis" rows="5" style="width: 80%" placeholder="Rx."></textarea></center>
+                </div>
                     <table class="table table-condensed">
                         <tbody class="field_wrapper">
                             <a href="javascript:void(0);" class="add_button" title="Add field">
