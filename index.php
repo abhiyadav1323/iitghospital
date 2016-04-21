@@ -16,13 +16,16 @@
 
 <body background="hospital_photos/small_5.jpg" style="background-repeat: no-repeat; background-attachment: fixed; background-size: cover">
 <div class="row">
-  <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="index.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
-      </div>
-    </div>
-  </nav>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="navbar-brand" href="logout.php?logout" style="font-size: large"><b>Logout</b></a></li>
+            </ul>
+        </div>
+    </nav>
 </div>
 <div class="row" style="padding-top: 4%">
 </div>

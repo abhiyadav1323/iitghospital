@@ -28,7 +28,7 @@ $row=mysqli_fetch_assoc($query_run);
 <body>
 
 <div class="row">
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="staff_pharma.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>

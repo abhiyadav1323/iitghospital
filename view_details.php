@@ -55,10 +55,10 @@ if(isset($_SESSION['patient_id'])) {
 <body>
 
 <div class="row">
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
+                <a class="navbar-brand" href="staff_recep.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="navbar-brand" href="logout.php?logout" style="font-size: large"><b>Logout</b></a></li>
@@ -68,7 +68,7 @@ if(isset($_SESSION['patient_id'])) {
 </div>
 
 <div class="row" style="padding-top: 5%">
-    <div class="col-sm-5" style="padding-top: 3%; padding-left: 10%">
+    <div class="col-sm-5" style="padding-top: 3%; padding-left: 10%; padding-bottom: 2%">
         <!-- Profile Image -->
         <div class="panel panel-primary">
             <center><img src="<?php echo '/../patients/'.$row["username"].'/profile.jpg';?>" class="profile-user-img img-responsive img-circle" 
