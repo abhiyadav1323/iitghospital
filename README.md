@@ -80,10 +80,9 @@ The system can broadly be broken down into the following features:
     the prescribed medicine is not there he/she can change the medicine.
     
     The doctor will have the ability to check the medical history of the
-    patient in order to provide a more accurate diagnosis.
-    
-    Doctor can search for information on any medicine using the api we have 
-    integrated in our system.
+    patient in order to provide a more accurate diagnosis. Doctor can search 
+    for information on any medicine using the api we have integrated 
+    in our system.
 
 
   * Pharmacist Module:
@@ -99,7 +98,7 @@ The system can broadly be broken down into the following features:
     from IITG hospital now.
     
     
-    * Patient Module:
+  * Patient Module:
   --------------------
     
     This module offers the patient to view their past medical records 
