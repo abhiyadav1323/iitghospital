@@ -77,7 +77,7 @@ $row=mysqli_fetch_assoc($query_run);
                         <td class="text-center"><?php echo $row1["username"]; ?></td>
                         <td class="text-center"><?php echo $row1["name"]; ?></td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-xs btn-primary">View</button>
+                            <button type="button" class="btn btn-xs btn-primary">Generate pdf</button>
                         </td>
                     </tr>
                     <?php
