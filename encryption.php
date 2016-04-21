@@ -30,7 +30,8 @@
     	'time'=>utf8_encode($iv.openssl_encrypt($time,METHOD,$key,OPENSSL_RAW_DATA,$iv)), 
     	'number_of_medicines'=>utf8_encode($iv.openssl_encrypt((string)$number_of_medicines,METHOD,$key,OPENSSL_RAW_DATA,$iv)),
     	'patient_username'=>utf8_encode($iv.openssl_encrypt($pat['username'],METHOD,$key,OPENSSL_RAW_DATA,$iv)), 
-    	'patient_name'=>utf8_encode($iv.openssl_encrypt($pat['name'],METHOD,$key,OPENSSL_RAW_DATA,$iv)));
+    	'patient_name'=>utf8_encode($iv.openssl_encrypt($pat['name'],METHOD,$key,OPENSSL_RAW_DATA,$iv)),
+        'diagnosis'=>utf8_encode($iv.openssl_encrypt(nl2br($_POST['diagnosis']),METHOD,$key,OPENSSL_RAW_DATA,$iv)));
     
     
     for($i=0;$i<$number_of_medicines;$i++) 

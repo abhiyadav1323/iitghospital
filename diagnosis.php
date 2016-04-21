@@ -193,6 +193,9 @@ function checkQuantityValid(id)
                                 $med['patient_name'] = utf8_decode($med['patient_name']);
                                 $med['patient_name'] = mb_substr($med['patient_name'], $ivsize, null, '8bit');
                                 $med['patient_name'] = openssl_decrypt($med['patient_name'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                $med['diagnosis'] = utf8_decode($med['diagnosis']);
+                                $med['diagnosis'] = mb_substr($med['diagnosis'], $ivsize, null, '8bit');
+                                $med['diagnosis'] = openssl_decrypt($med['diagnosis'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
                                 for($j=0;$j<$med['number_of_medicines'];$j++) 
                                 {
                                     $med['prescription'][$j]['name_of_medicine'] = utf8_decode($med['prescription'][$j]['name_of_medicine']);
@@ -210,7 +213,7 @@ function checkQuantityValid(id)
                                 }
                                 //var_dump($med);
                                 ?>
-                                <div class="modal-body" style="overflow-y: scroll; height: 60vh;">
+                                <div class="modal-body" style="overflow-y: scroll; height: 75vh;">
                                     <div class="col-sm-12">
                                         <div class="col-sm-12">
                                             <span class="text-right col-sm-6"><b>Doctor Name:</b></span>
@@ -228,6 +231,12 @@ function checkQuantityValid(id)
                                             <span class="text-right col-sm-6"><b>Patient Name:</b></span>
                                             <span class="col-sm-6"><?php echo $med["patient_name"]; ?></span>
                                         </div>
+                                        <hr style="border: solid">
+                                        <div class="col-sm-12">
+                                            <span class="text-right col-sm-2 text-middle"><b>Diagnosis:</b></span>
+                                            <span class="col-sm-10"><?php echo $med["diagnosis"]; ?></span>
+                                        </div>
+                                        <div class="col-sm-12" style="padding-bottom: 3%"></div>
                                         <hr style="border: solid">
                                         <table class="table table-condensed">
                                             <tbody>
@@ -279,11 +288,13 @@ function checkQuantityValid(id)
         <!-- Profile Image -->
         <div class="panel panel-primary">
             <div class="panel-title">
-        <h2 style="color: #8a6d3b"><center><b>Diagnosis</b></center></h2>
+        <h2 style="color: #8a6d3b"><center><b>Prescription</b></center></h2>
       </div>
       <form class="form-horizontal" role="form" method="post" action="encryption.php">
             <div class="panel-body" style="overflow-y: scroll; height: 51vh;">
-                
+                <div class="col-sm-12">
+                    <center><textarea type="text" name="diagnosis" rows="5" style="width: 80%" placeholder="Rx."></textarea></center>
+                </div>
                     <table class="table table-condensed">
                         <tbody class="field_wrapper">
                             <a href="javascript:void(0);" class="add_button" title="Add field">

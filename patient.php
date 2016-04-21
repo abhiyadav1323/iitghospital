@@ -227,6 +227,9 @@
                                 $med['patient_name'] = utf8_decode($med['patient_name']);
                                 $med['patient_name'] = mb_substr($med['patient_name'], $ivsize, null, '8bit');
                                 $med['patient_name'] = openssl_decrypt($med['patient_name'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
+                                $med['diagnosis'] = utf8_decode($med['diagnosis']);
+                                $med['diagnosis'] = mb_substr($med['diagnosis'], $ivsize, null, '8bit');
+                                $med['diagnosis'] = openssl_decrypt($med['diagnosis'],METHOD,$key,OPENSSL_RAW_DATA,$iv);
                                 for($j=0;$j<$med['number_of_medicines'];$j++) 
                                 {
                                     $med['prescription'][$j]['name_of_medicine'] = utf8_decode($med['prescription'][$j]['name_of_medicine']);
@@ -244,7 +247,7 @@
                                 }
                                 //var_dump($med);
                                 ?>
-                                <div class="modal-body" style="overflow-y: scroll; height: 60vh;">
+                                <div class="modal-body" style="overflow-y: scroll; height: 75vh;">
                                     <div class="col-sm-12">
                                         <div class="col-sm-12">
                                             <span class="text-right col-sm-6"><b>Doctor Name:</b></span>
@@ -262,6 +265,12 @@
                                             <span class="text-right col-sm-6"><b>Patient Name:</b></span>
                                             <span class="col-sm-6"><?php echo $med["patient_name"]; ?></span>
                                         </div>
+                                        <hr style="border: solid">
+                                        <div class="col-sm-12">
+                                            <span class="text-right col-sm-2 text-middle"><b>Diagnosis:</b></span>
+                                            <span class="col-sm-10"><?php echo $med["diagnosis"]; ?></span>
+                                        </div>
+                                        <div class="col-sm-12" style="padding-bottom: 3%"></div>
                                         <hr style="border: solid">
                                         <table class="table table-condensed">
                                             <tbody>
