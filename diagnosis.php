@@ -325,7 +325,7 @@ $(document).ready(function(){
     var fieldHTML;
     var x = 0; 
     $(addButton).click(function(){ //Once add button is clicked
-            x++; //Increment field counter
+            x++; //Increment the  field counter
             fieldHTML ='<tr>'+
     '<td class="text-center">'+x+'</td>'+
     '<td  class="text-center"><input type="text" class="'+x+'" name="Med[name_med][]" onblur="checkNameValid(this.className)"><span id="'+x+'"></span></td>'+
@@ -339,6 +339,7 @@ $(document).ready(function(){
 });
 </script>
 
+<!--  bootstrap style  -->
 
 
 

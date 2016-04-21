@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--  bootstrap style  -->
 <html lang="en">
 <head>
     <title>Home Page - Receptionist</title>

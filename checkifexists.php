@@ -23,7 +23,7 @@ $slquery = "SELECT * FROM inventory WHERE mname = '$name_of_medicine'";
 $selectresult = mysqli_query($conn,$slquery);
 $row_cnt = mysqli_num_rows($selectresult);
 $arr = mysqli_fetch_assoc($selectresult);
-$available_quantity = $arr["mquantity"];
+$available_quantity = $arr["mquantity"]; //check medicine exist or not
 
 
 if($quantity_of_medicine=="notrequired")

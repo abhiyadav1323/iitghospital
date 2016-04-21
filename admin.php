@@ -22,7 +22,7 @@
     $cpassword = md5(mysqli_real_escape_string($conn,test_input($_POST['cpassword'])));
     $dob = mysqli_real_escape_string($conn,test_input($_POST['dob']));
     $gender= mysqli_real_escape_string($conn,test_input($_POST['gender']));
-    $post = mysqli_real_escape_string($conn,test_input($_POST['post']));
+    $post = mysqli_real_escape_string($conn,test_input($_POST['post']));   //checking entries
 
     $slquery = "SELECT * FROM staff WHERE username = '$username'";
     $selectresult = mysqli_query($conn,$slquery);
@@ -76,7 +76,7 @@
     return $data;
   } 
 ?>
-
+<!--  bootstrap style  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>

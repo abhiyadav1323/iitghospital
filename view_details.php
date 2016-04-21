@@ -18,7 +18,7 @@ if(isset($_SESSION['patient_id'])) {
         $dob = $row["dob"];
         $gender = $row["gender"];
         $phone = $row["phone"];
-        $username = $row["username"];
+        $username = $row["username"];  //taking input
 
         //echo $name . $email . $dob . $gender . $phone . $roll;
     }
@@ -38,6 +38,7 @@ if(isset($_SESSION['patient_id'])) {
 
 
 <!DOCTYPE html>
+<!-- bootstap style  -->
 <html lang="en">
 <head>
     <title>Home Page - Doctor</title>

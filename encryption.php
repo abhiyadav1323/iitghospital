@@ -17,7 +17,7 @@
     $doc = mysqli_fetch_assoc($run1);
     $medicines = $_POST['Med'];
     $date = date("d-m-Y");
-    $time= date(" H:i:s"); 
+    $time= date(" H:i:s"); //encryption in format of 
 
     $key = $pat['password'];
     $ivsize = openssl_cipher_iv_length(METHOD);
@@ -45,7 +45,7 @@
     $file='/var/www/html/patients/'.$pat['username'].'/'.$file_name;
     $fp = fopen( $file, "wb");
     chmod($file, 0777);   
-    fwrite($fp,json_encode($med));
+    fwrite($fp,json_encode($med));//json data
     fclose($fp);
     $del_query = "DELETE FROM queue WHERE pid = '$pat_id'";
     $del_result = mysqli_query($conn,$del_query);

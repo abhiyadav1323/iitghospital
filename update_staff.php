@@ -12,13 +12,14 @@ if(isset($_POST['update']))
     $dob = mysqli_real_escape_string($conn,test_input($_POST['dob']));
     $gender= mysqli_real_escape_string($conn,test_input($_POST['gender']));
     $post = mysqli_real_escape_string($conn,test_input($_POST['post']));
-    $username = mysqli_real_escape_string($conn,test_input($_POST['uname']));
+    $username = mysqli_real_escape_string($conn,test_input($_POST['uname']));//taking input 
     //$password = md5(mysqli_real_escape_string($conn,test_input($_POST['password'])));
    
     //$id = $_SESSION['id'];
     $query = "UPDATE staff SET name='$name', email='$email', dob='$dob', gender='$gender', post='$post' WHERE username='$username'";
     $result = mysqli_query($conn,$query);
     // echo $result;
+    //from header admin.php
     header('Location: admin.php');
    
 }
