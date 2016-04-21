@@ -11,7 +11,7 @@
     $result = mysqli_query($conn,$query);
     $row = mysqli_fetch_assoc($result);
     $dir='/var/www/html/patients/'.$row['username'].'/';
-    $files = preg_grep('/^([^.])/', scandir($dir, 1));
+    $files = scandir($dir, 1);
     $name = $row['name'];
     $email = $row['email'];
     $dob = $row['dob'];
@@ -37,7 +37,7 @@
 </head>
 <body>
 <div class="row">
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="patient.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
@@ -50,7 +50,7 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-5" style="padding-top: 8%; padding-left: 10%">
+    <div class="col-sm-5" style="padding-top: 8%; padding-left: 10%; padding-bottom: 2%">
         <!-- for Profile Image -->
         <div class="panel panel-primary">
             <center><img src="<?php echo '/../patients/'.$row["username"].'/profile.jpg';?>" class="profile-user-img img-responsive img-circle" 
@@ -166,7 +166,7 @@
 
 
 
-    <div class="col-sm-5 pull-right" style="padding-top: 8%; padding-right: 10%">
+    <div class="col-sm-5 pull-right" style="padding-top: 8%; padding-right: 10%; padding-bottom: 2%">
         <!-- Profile Image -->
         <div class="panel panel-primary">
             <div class="panel-title">
@@ -184,7 +184,7 @@
                     }
                     for($i=0,$c=0;$i<count($files);$i++)
                     {
-                        if(strpos($files[$i], 'jpg') === false)
+                        if(strpos($files[$i], '.json') !== false)
                         {
                             $c++;
                         ?>

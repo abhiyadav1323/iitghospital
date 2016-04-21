@@ -59,9 +59,8 @@ $row=mysqli_fetch_assoc($query_run);
     <script src="bootstrap/js/bootstrap.js"></script>
     <script src="AdminLTE/js/app.js"></script>
 </head>
-<body>
-<div class="row">
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
+<body><div class="row">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="staff_recep.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
@@ -72,7 +71,6 @@ $row=mysqli_fetch_assoc($query_run);
         </div>
     </nav>
 </div>
-
 <div class="row" style="padding-top: 5%; padding-bottom: 1%">
     <div class="col-sm-12"><center>
         <h1><label class="label label-info"><?php echo 'Hello,'.' '.$row['name']; ?></label></h1>

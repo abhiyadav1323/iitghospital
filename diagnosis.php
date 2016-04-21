@@ -14,7 +14,7 @@
         $run = mysqli_query($conn,$query);
         $row = mysqli_fetch_assoc($run);
         $dir='/var/www/html/patients/'.$row['username'].'/';
-        $files = preg_grep('/^([^.])/', scandir($dir, 1));
+        $files =  scandir($dir, 1);
     }
      
 ?>
@@ -76,7 +76,7 @@ function checkQuantityValid(id)
 </head>
 <body>
 <div class="row">
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="height: 10%">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="staff_doctor.php" style="font-size: xx-large"><b>HOSPITAL - Indian Institute of Technology Guwahati</b></a>
@@ -149,7 +149,7 @@ function checkQuantityValid(id)
                 }
                 for($i=0,$c=0;$i<count($files);$i++)
                 {
-                    if(strpos($files[$i], 'jpg') === false)
+                    if(strpos($files[$i], '.json') !== false)
                     {
                         $c++;
                     ?>
