@@ -63,7 +63,7 @@ if(isset($_POST['register']))
         $path = '/var/www/html/patients/'.$username.'/';
         mkdir($path);
         chmod($path, 0777);
-        echo mkdir($path.'receipts/');
+        mkdir($path.'receipts/');
         chmod($path.'receipts/', 0777);
         if (move_uploaded_file($_FILES["profile"]["tmp_name"], $file)) {
             chmod($file, 0777);
