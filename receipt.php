@@ -109,7 +109,7 @@ $html.=$med["patient_username"];
 $html.=<<<EOD
                         </span>
                     </div>
-                    <div class="col-sm-12" style="padding-bottom: 2%">
+                    <div class="col-sm-12" style="padding-bottom: 1%">
                         <span class="text-right col-sm-6"><b>Patient Name:</b></span>
                         <span class="col-sm-6">
 EOD;
@@ -158,15 +158,34 @@ $html.=<<<EOD
 EOD;
 
 
+    for($j=0;$j<$med['number_of_medicines'];$j++) 
+    {
+        $med_name = $med['prescription'][$j]['name_of_medicine'];
+        $query = "SELECT * FROM inventory WHERE mname = '$med_name'";
+        $result = mysqli_query($conn,$query);
+        $row_cnt = mysqli_num_rows($result);
+        if($row_cnt)
+        {
+            $row = mysqli_fetch_assoc($result);
+            $quantity = $row["mquantity"];
+            $pres_quantity = $med['prescription'][$j]['quantity'];
+            if($quantity>=$pres_quantity)
+                $quantity -= $pres_quantity;
+            else
+                $quantity = 0;
+            $query = "UPDATE inventory SET mquantity='$quantity' WHERE mname='$med_name'";
+            $result = mysqli_query($conn,$query);
+        }
+
+    }
 
 
-
-$file = '/var/www/html/patients/'.$row["pid"].'/receipts/'.substr($file_name, 0, -5).'.html';
+$file = '/var/www/html/patients/'.$pat_username.'/receipts/'.substr($file_name, 0, -5).'.html';
 $myfile=fopen($file,"w") or die("Unable to open file!");
 fwrite($myfile,$html);
 fclose($myfile);
 chmod($file, 0777);
-$receipt_name = '/var/www/html/patients/'.$row["pid"].'/receipts/'.substr($file_name, 0, -5).'.pdf';
+$receipt_name = '/var/www/html/patients/'.$pat_username.'/receipts/'.substr($file_name, 0, -5).'.pdf';
 exec("xvfb-run -a /var/www/html/team1cs243/wkhtmltopdf '$file' '$receipt_name'");
 chmod($receipt_name, 0777);
 $del_query = "DELETE FROM pharma_queue WHERE id = '$id'";
