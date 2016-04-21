@@ -77,8 +77,9 @@ $row=mysqli_fetch_assoc($query_run);
                         <td class="text-center"><?php echo $row1["username"]; ?></td>
                         <td class="text-center"><?php echo $row1["name"]; ?></td>
                         <td class="text-center">
+                            <a href="receipt.php?id=<?php echo $row["id"];?>">
                             <button type="button" class="btn btn-xs btn-primary">Generate pdf</button>
-                        </td>
+                        </a></td>
                     </tr>
                     <?php
                     }
@@ -92,12 +93,11 @@ $row=mysqli_fetch_assoc($query_run);
 
 
 <div class="col-sm-7" style="padding-right: 3%; padding-top: 1%">
-        <div class="box " style="border: solid; border-color: #e08e0b ">
-            <div class="box-title">
-                <h2 style="color: #8a6d3b"><center><b>Inventory</b></center></h2>
+        <div class="panel panel-danger">
+            <div class="panel-title">
+                <h2 style="color: #8a6d3b"><center><b>Medical Inventory</b></center></h2>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body" style="overflow-y: scroll; height: 60vh">
+            <div class="panel-body" style="overflow-y: scroll; height: 60vh">
                 <table class="table table-condensed table-striped">
                     <tbody><tr>
                         <th class="text-center">S.No.</th>
