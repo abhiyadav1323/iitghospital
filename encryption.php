@@ -54,8 +54,8 @@
     $del_query = "DELETE FROM queue WHERE id = '$queue_id'";
     $del_result = mysqli_query($conn,$del_query);
     $sql="INSERT INTO pharma_queue (pid, reciept) VALUES ('$pat_id', '$file_name')";
-    /*if(mysqli_query($conn,$sql))
-    	header('Location: staff_doctor.php');*/
+    $sql_result = mysqli_query($conn,$sql);
+    	//header('Location: staff_doctor.php');*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,6 +140,6 @@
 </div>
 </div>
     <a href="staff_doctor.php">
-    <button type="button" class="btn btn-xs btn-primary" style="padding: 1%">Approve to pharmacist</button>
+    <button type="button" class="btn btn-xs btn-primary" style="padding: 1%">Send to pharmacist</button>
 </body>
 </html>
