@@ -81,6 +81,10 @@ $html =<<<EOD
         <div class="panel panel-danger">
             <div class="panel-title">
                 <h2 style="color: #8a6d3b"><center><b>Medical Receipt</b></center></h2>
+                                                               <div class="pull-right col-sm-3">
+                        <center><img src="iitg.jpg" class="profile-user-img img-responsive img-circle" 
+                    style="height: 100px; width: 100px; ;"/></center>
+                    </div>
             </div>
             <div class="panel-body">
             <!-- /.box-header -->
