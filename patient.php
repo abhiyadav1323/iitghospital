@@ -1,3 +1,15 @@
+<!--
+****************************************************************************************************
+                                    Web App for IITG Hospital
+                                    -------------------------
+            The software intends at automating the working of the IITG hospital to ensure 
+            that the patient can be given a great experience while visiting the hospital 
+            and is given medicines which correspond to the diagnosis.
+            Copyright © 2016, team1cs243.
+****************************************************************************************************
+-->
+
+
 <!-- <br><br><br><br><br><br><br><br><br> -->
 <?php
   session_start();
