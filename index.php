@@ -81,7 +81,7 @@
 
 
 
-    <div class="col-sm-4 pull-right" style="padding-right: 6%; padding-top: 8%">
+    <div class="col-sm-4 pull-right" style="padding-right: 6%; padding-top: 10%">
 
       <div class="panel panel-success">
         <div class="panel-body">
@@ -91,8 +91,6 @@
               Login for Doctor</button>
             <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#pharmacist">
               Login for Pharmacist</button>
-              <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#office">
-              Login for Office Staff</button>
               <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target="#patient">
               Login for Patients</button><br>
               <a href="patient_register.php">
