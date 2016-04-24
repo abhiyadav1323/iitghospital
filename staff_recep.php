@@ -35,7 +35,7 @@ include_once 'dbconnect.php';
         if($row_cnt==0)
         {
             ?>
-            <script>alert('The id is invalid!');</script>
+            <script>alert('The username is invalid!');</script>
             <?php
         }
         else

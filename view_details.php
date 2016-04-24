@@ -8,7 +8,7 @@
             Copyright © 2016, team1cs243.
 ****************************************************************************************************
 -->
-
+<!-- <br><br><br><br><br><br><br><br><br> -->
 <?php
 session_start();
 include_once 'dbconnect.php';
@@ -37,11 +37,23 @@ if(isset($_SESSION['patient_id'])) {
     {
         $doc_name = $_POST['name'];
         $sDate = date("Y-m-d H:i:s");
-        $query1 = "INSERT INTO queue (pid, time, name) VALUES ('$idofpatient', '$sDate', '$doc_name')";
-        $query_run1 = mysqli_query($conn,$query1);
-        ?>
-        <script type="text/javascript">alert('The appointment has been done successfully!');</script>
-        <?php
+        $sql = "SELECT * from staff WHERE name='$doc_name'";
+        $run = mysqli_query($conn, $sql);
+        $doc_details = mysqli_fetch_assoc($run);
+        if($doc_details["post"]!="doctor")
+        {
+            ?>
+            <script type="text/javascript">alert('Entered name is not a doctor!');</script>
+            <?php
+        }    
+        else
+        {
+            $query1 = "INSERT INTO queue (pid, time, name) VALUES ('$idofpatient', '$sDate', '$doc_name')";
+            $query_run1 = mysqli_query($conn,$query1);
+            ?>
+            <script type="text/javascript">alert('The appointment has been done successfully!');</script>
+            <?php
+        }
 
     }
 }
