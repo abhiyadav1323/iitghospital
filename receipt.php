@@ -77,26 +77,23 @@ $html =<<<EOD
 <html lang="en">
 <head>
     <title>Home Page - Pharmacist</title>
-    <link rel="stylesheet" href="/var/www/html/team1cs243/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="/var/www/html/team1cs243/AdminLTE/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="/var/www/html/team1cs243/team1cs243/AdminLTE/css/skins/_all-skins.min.css">
-    <script src="/var/www/html/team1cs243/bootstrap/js/jquery.min.js"></script>
-    <script src="/var/www/html/team1cs243/bootstrap/js/jquery-ui.js"></script>
-    <script src="/var/www/html/team1cs243/bootstrap/js/bootstrap.js"></script>
-    <script src="/var/www/html/team1cs243/AdminLTE/js/app.js"></script>
+    <link rel="stylesheet" href="AdminLTE/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="team1cs243/AdminLTE/css/skins/_all-skins.min.css">
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/jquery-ui.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="AdminLTE/js/app.js"></script>
 </head>
 <body>
 <div class="row">
-        <div class="col-sm-6 col-sm-offset-3" style="padding-top: 6%">
+        <div class="col-sm-6 col-sm-offset-3" style="padding-top: 4%">
         <div class="panel panel-danger">
             <div class="panel-title">
                 <h2 style="color: #8a6d3b"><center><b>Medical Receipt</b></center></h2>
-                                                               <div class="pull-right col-sm-3">
-                        <center><img src="iitg.jpg" class="profile-user-img img-responsive img-circle" 
-                    style="height: 100px; width: 100px; ;"/></center>
-                    </div>
+                                                               
             </div>
             <div class="panel-body">
             <!-- /.box-header -->
@@ -196,16 +193,20 @@ EOD;
     }
 
 
-$file = '/var/www/html/patients/'.$pat_username.'/receipts/'.substr($file_name, 0, -5).'.html';
-$myfile=fopen($file,"w") or die("Unable to open file!");
-fwrite($myfile,$html);
-fclose($myfile);
-chmod($file, 0777);
-$receipt_name = '/var/www/html/patients/'.$pat_username.'/receipts/'.substr($file_name, 0, -5).'.pdf';
-exec("xvfb-run -a /var/www/html/team1cs243/wkhtmltopdf '$file' '$receipt_name'");
-chmod($receipt_name, 0777);
+// $file = '/var/www/html/patients/'.$pat_username.'/receipts/'.substr($file_name, 0, -5).'.html';
+// $myfile=fopen($file,"w") or die("Unable to open file!");
+// fwrite($myfile,$html);
+// fclose($myfile);
+// chmod($file, 0777);
+// $receipt_name = '/var/www/html/patients/'.$pat_username.'/receipts/'.substr($file_name, 0, -5).'.pdf';
+// exec("xvfb-run -a wkhtmltopdf '$file' '$receipt_name'");
+// chmod($receipt_name, 0777);
 $del_query = "DELETE FROM pharma_queue WHERE id = '$id'";
 $del_result = mysqli_query($conn,$del_query);
-unlink($file);
-header('Location: staff_pharma.php');
-?>
+// unlink($file);
+// header('Location: staff_pharma.php');
+    echo $html;
+    ?>
+<a href="staff_pharma.php">
+   <center> <button type="button" class="btn btn-lg btn-primary">Back</button></center>
+</a>
