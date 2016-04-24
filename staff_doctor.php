@@ -20,6 +20,40 @@ $id=$_SESSION['id'];
 $slquery="SELECT * from staff WHERE id='$id'";
 $query_run = mysqli_query($conn,$slquery);
 $row=mysqli_fetch_assoc($query_run);
+
+
+if(isset($_POST["search_med"]))
+{
+    $que = $_POST["medicinequery"];
+
+        $url = 'https://api.fda.gov/drug/label.json?search=' . urlencode($que);
+    
+    $proxy = '127.0.0.1:8080';
+//$proxyauth = 'user:password';
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL,$url);
+curl_setopt($ch, CURLOPT_PROXY, $proxy);
+//curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxyauth);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+$data = curl_exec($ch);
+
+curl_close($ch);
+      // $result = json_decode($data, true);
+$result = json_decode($data, true); //json decoding
+if($result==null&&json_last_error()!=JSON_ERROR_NONE)
+{
+    echo "Incorrect data! "; // print incorrect data
+}
+else {
+    if(isset($result['results'][0]['indications_and_usage'][0]))
+$result_string = $result['results'][0]['indications_and_usage'][0];
+//echo $result_string;
+} // null
+//else echo "No such result!";
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +84,7 @@ $row=mysqli_fetch_assoc($query_run);
         </div>
     </nav>
 </div>
-<div class="row" style="padding-top: 5%; padding-bottom: 1%">
+<div class="row" style="padding-top: 5%; padding-bottom: 2%">
     <div class="col-sm-12"><center>
         <h1><label class="label label-info"><?php echo 'Hello,'.' '.$row['name']; ?></label></h1>
     </center></div>
@@ -62,7 +96,7 @@ $row=mysqli_fetch_assoc($query_run);
                 <h2 style="color: #8a6d3b"><center><b>Upcoming Patients</b></center></h2>
             </div>
             <!-- /.box-header -->
-            <div class="box-body" style="overflow-y: scroll; height: 60vh">
+            <div class="box-body" style="overflow-y: scroll; height: 70vh">
                 <table class="table table-condensed table-striped">
                     <tbody><tr>
                         <th>S.No.</th>
@@ -103,8 +137,9 @@ $row=mysqli_fetch_assoc($query_run);
             <!-- /.box-body -->
         </div>
     </div>
-
-    <div class="col-sm-4">
+    <div class="col-sm-8">
+<div class="row">
+    <div class="col-sm-6">
         <div class="panel panel-primary">
             <div class="panel-title">
                 <h2 style="color: #8a6d3b"><center><b>Current Patient</b></center></h2>
@@ -144,13 +179,13 @@ $row=mysqli_fetch_assoc($query_run);
         </div>
     </div>
 
-    <div class="col-sm-4 " style="padding-right: 3%">
+    <div class="col-sm-6" style="padding-right: 7%">
         <div class="panel panel-primary">
             <div class="panel-title">
                 <h2 style="color: #8a6d3b"><center><b>Search Medicines</b></center></h2>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="post" action="medicinedetails.php">
+                <form class="form-horizontal" role="form" method="post" action="staff_doctor.php">
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="medicinequery">Med. Name:</label>
                         <div class="col-sm-7">
@@ -159,7 +194,7 @@ $row=mysqli_fetch_assoc($query_run);
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-5 col-sm-5">
-                            <button type="submit" name="search" class="btn btn-lg btn-success">Search</button>
+                            <button type="submit" name="search_med" class="btn btn-lg btn-success">Search</button>
                         </div>
                     </div>
                 </form>
@@ -167,8 +202,30 @@ $row=mysqli_fetch_assoc($query_run);
 
         </div>
     </div>
+</div>
+<div class="row" style="padding-top: 2%">
+    <div class="col-sm-12" style="padding-right: 7%" >
+         <div class="panel panel-primary" style="overflow-y: scroll; height: 43vh">
+            <div class="panel-title">
+                <h2 style="color: #8a6d3b"><center><b>Medicine Details</b></center></h2>
+            </div>
+            <div class="panel-body">
+            <?php
+            if(!isset($result_string)&&!isset($_POST["search_med"]))
+                echo "<h4><center>Currently no medicine details</center></h4>";
+            else if(!empty($result_string)) 
+                echo $result_string;
+            else 
+                echo "<h4><center>Medicine not found</center></h4>";
+            ?>
+        </div>
+         </div>
+    </div>
+</div>
+</div>
 
 </div>
+<?php //echo $result_string;?>
 
 
 </body>

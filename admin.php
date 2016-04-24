@@ -122,7 +122,7 @@
       <div class="panel-title">
         <h2 style="color: #8a6d3b"><center><b>List of Hospital Staff Members</b></center></h2>
       </div>
-      <div class="panel-body" style="overflow-y: scroll; height: 70vh;">
+      <div class="panel-body" style="overflow-y: scroll; height: 75vh;">
         <table class="table table-condensed">
           <tbody>
           <?php
