@@ -90,7 +90,7 @@ $row=mysqli_fetch_assoc($query_run);
                         <td class="text-center"><?php echo $row1["name"]; ?></td>
                         <td class="text-center">
                             <a href="receipt.php?id=<?php echo $row["id"];?>">
-                            <button type="button" class="btn btn-xs btn-primary">Generate pdf</button>
+                            <button type="button" class="btn btn-xs btn-primary">Generate Receipt</button>
                         </a></td>
                     </tr>
                     <?php
