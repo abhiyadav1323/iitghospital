@@ -97,6 +97,22 @@ The system can broadly be broken down into the following features:
     easily read by anyone opposed to the handwritten medicine receipt we get
     from IITG hospital now.
     
+  * Installation Specifics for Admins
+  --------------------
+    
+    ** Go to the root directory of your web server (/var/www/html)
+    ** First clone the repository, using git clone https://gitlab.com/VistaarJ/team1cs243/
+    ** Run bash configure.sh, which will 
+        (a) Install Apache2 server
+        (b) Install php5
+        (c) Install MySQL
+        (d) Install phpMyAdmin
+        (e) Restart the Apache2 server
+        (f) Create patients folder in root directory
+        (g) Give mod. permissions to the folder
+        (h) Create database for the project using a MySQL dump
+        
+
     
   * Patient Module:
   --------------------
