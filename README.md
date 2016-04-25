@@ -100,9 +100,9 @@ The system can broadly be broken down into the following features:
   * Installation Specifics for Admins
   --------------------
     
-    ** Go to the root directory of your web server (/var/www/html)
-    ** First clone the repository, using git clone https://gitlab.com/VistaarJ/team1cs243/
-    ** Run bash configure.sh, which will 
+    #### Go to the root directory of your web server (/var/www/html)
+    #### First clone the repository, using git clone https://gitlab.com/VistaarJ/team1cs243/
+    #### Run bash configure.sh, which will 
         (a) Install Apache2 server
         (b) Install php5
         (c) Install MySQL
