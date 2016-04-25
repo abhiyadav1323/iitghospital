@@ -25,7 +25,7 @@
         $query = "SELECT * from patients WHERE username='$id'";
         $run = mysqli_query($conn,$query);
         $row = mysqli_fetch_assoc($run);
-        $dir='/var/www/html/patients/'.$row['username'].'/';
+        $dir='../patients/'.$row['username'].'/';
         $files =  scandir($dir, 1);
     }
      
@@ -134,7 +134,7 @@ function checkQuantityValid(id)
                     </div>
                 </div>
                 <div class="pull-right col-sm-3">
-                    <center><img src="<?php echo '/../patients/'.$row["username"].'/profile.jpg';?>" class="profile-user-img img-responsive img-circle" 
+                    <center><img src="<?php echo '../patients/'.$row["username"].'/profile.jpg';?>" class="profile-user-img img-responsive img-circle" 
                 style="height: 150px; width: 150px;"/></center>
                 </div>
             </div>
@@ -173,7 +173,7 @@ function checkQuantityValid(id)
                                 </div>
                                 <?php
                                 $file_name = $files[$i];
-                                $file='/var/www/html/patients/'.$row["username"].'/'.$file_name;
+                                $file='../patients/'.$row["username"].'/'.$file_name;
                                 $fp = fopen( $file, "rb");
                                 $med = fread($fp,filesize($file));
                                 fclose($fp);

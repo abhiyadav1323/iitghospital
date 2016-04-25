@@ -54,7 +54,7 @@
     	$med['prescription'][$i]['basic_information'] = utf8_encode($iv.openssl_encrypt($medicines['info_med'][$i],METHOD,$key,OPENSSL_RAW_DATA,$iv));
     }
     $file_name = date("d-m-Y H:i:s").'.json';
-    $file='/var/www/html/patients/'.$pat['username'].'/'.$file_name;
+    $file='../patients/'.$pat['username'].'/'.$file_name;
     $fp = fopen( $file, "wb");
     chmod($file, 0777);   
     fwrite($fp,json_encode($med));//json data

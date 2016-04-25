@@ -23,7 +23,7 @@ $query_run = mysqli_query($conn,$slquery);
 $row=mysqli_fetch_assoc($query_run);
 
 $file_name = $row["reciept"];
-$file = '/var/www/html/patients/'.$row["pid"].'/'.$file_name;
+$file = '../patients/'.$row["pid"].'/'.$file_name;
 $fp = fopen( $file, "rb");
 $med = fread($fp,filesize($file));
 fclose($fp);

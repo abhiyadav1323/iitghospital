@@ -27,7 +27,7 @@ if(isset($_POST['register']))
     $cpassword = md5(mysqli_real_escape_string($conn,test_input($_POST['cpassword'])));
     $password = md5(mysqli_real_escape_string($conn,test_input($_POST['password'])));
 
-    $dir = "/var/www/html/patients/";
+    $dir = "../patients/";
     $f = $dir . $username . '/' . basename($_FILES["profile"]["name"]);
     $imageFileType = pathinfo($f,PATHINFO_EXTENSION);
     $file = $dir . $username . '/profile.' . $imageFileType;
@@ -72,7 +72,7 @@ if(isset($_POST['register']))
 
     else if(mysqli_query($conn,$sql))
     {
-        $path = '/var/www/html/patients/'.$username.'/';
+        $path = '../patients/'.$username.'/';
         mkdir($path);
         chmod($path, 0777);
         mkdir($path.'receipts/');

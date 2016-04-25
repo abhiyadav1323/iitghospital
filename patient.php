@@ -22,7 +22,7 @@
     $query = "SELECT * FROM patients WHERE id = '$id'";
     $result = mysqli_query($conn,$query);
     $row = mysqli_fetch_assoc($result);
-    $dir='/var/www/html/patients/'.$row['username'].'/';
+    $dir='../patients/'.$row['username'].'/';
     $files = scandir($dir, 1);
     $name = $row['name'];
     $email = $row['email'];
@@ -65,7 +65,7 @@
     <div class="col-sm-5" style="padding-top: 8%; padding-left: 10%; padding-bottom: 2%">
         <!-- for Profile Image -->
         <div class="panel panel-primary">
-            <center><img src="<?php echo '/../patients/'.$row["username"].'/profile.jpg';?>" class="profile-user-img img-responsive img-circle" 
+            <center><img src="<?php echo '../patients/'.$row["username"].'/profile.jpg';?>" class="profile-user-img img-responsive img-circle" 
                 style="height: 200px; width: 200px; padding-top: 3%"/></center>
             <div class="panel-title">
         <h2 style="color: #8a6d3b"><center><b>Profile</b></center></h2>
@@ -208,7 +208,7 @@
                                 </div>
                                 <?php
                                 $file_name = $files[$i];
-                                $file='/var/www/html/patients/'.$username.'/'.$file_name;
+                                $file='../patients/'.$username.'/'.$file_name;
                                 $fp = fopen( $file, "rb");
                                 $med = fread($fp,filesize($file));
                                 fclose($fp);
