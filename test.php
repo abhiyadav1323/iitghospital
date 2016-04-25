@@ -1,7 +1,7 @@
 <?php
 include_once 'dbconnect.php';
 $output="";
-if(isset($_POST["submit"]))
+if(isset($_POST["registration"]))
 {
 	$query='SELECT * from staff';
 	$run=mysqli_query($conn,$query);
@@ -19,14 +19,74 @@ $query='SELECT * from staff';
 	$new_cnt=mysqli_num_rows($run);
 	echo $new_cnt;
 }
+
+if(isset($_POST["receplogin"]))
+{
+	$cmd = 'curl --data "username=vistaar&password=v&&post=receptionist" http://localhost/team1cs243/login.php --dump-header nx.txt';
+	exec('curl --data "username=vistaar&password=v&&post=receptionist" http://localhost/team1cs243/login.php /var/www/html/team1cs243/nx.txt',$output1);
+	var_dump($output1);
+	$file_name='nx.txt';
+	$fp = fopen($file_name,"rb");
+	$output = fread($fp,filesize($file_name));
+	echo $output;
+	fclose($fp);
+}
+
+if(isset($_POST["doctorlogin"]))
+{
+	$cmd = 'curl --data "username=abhishek.cse&password=a&post=doctor" http://localhost/team1cs243/login.php --dump-header nx.txt';
+	exec($cmd);
+	$fp = fopen("nx.txt","rb");
+	$output = fread($fp,filesize("nx.txt"));
+	echo $output;
+}
+
+
 ?>
+
+
 
 <html>
 <body>
+
 <form method="post">
-<button type="submit" name="submit">
-Click
+<button type="submit" name="registration">
+Test Registration in Database
 </button>
 </form>
+
+<div class="panel-primary">
+	<?php
+		if(isset($_POST["registration"]))
+		{
+			if($prev_cnt==$new_cnt)
+			{
+				echo "No change in table size.<br>";
+			}
+			else
+			{
+				echo "Size of Table changed from $prev_cnt => $new_cnt.<br>";
+			}
+		}
+
+
+
+
+	?>
+</div>
+
+
+<form method="post">
+<button type="submit" name="receplogin">
+Test login for receptionist
+</button>
+</form>
+
+<form method="post">
+<button type="submit" name="doctorlogin">
+Test login for doctor
+</button>
+</form>
+
 </body>
 </html>
