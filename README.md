@@ -2,7 +2,7 @@
 
 v2.0 25/04/2016
 
-Copyright © 2016, team1cs243.
+Copyright © 2016, Abhishek Yadav.
 
 
 
@@ -112,7 +112,7 @@ Installation Specifics for Admins
 ---------------------------------
 
         Go to the root directory of your web server (/var/www/html)
-        First clone the repository, using git clone https://gitlab.com/VistaarJ/team1cs243/
+        First clone the repository, using git clone https://github.com/abhiyadav1323/iitghospital.git
         Run bash configure.sh, which will 
         (a) Install Apache2 server
         (b) Install php5
@@ -150,7 +150,7 @@ Bugs
 ----
 
 All the issues yet to be completed or resolved are listed in the "Issues"
-tab of Gitlab.
+tab of Github.
 
 To report any bugs please contact the developers of the software.
 The detais of the same are available in the Authors section.
@@ -162,10 +162,7 @@ Authors
 
 The project is updated and maintained by-
 
-Abhishek Yadav https://gitlab.com/abhiyadav1323/
-Vistaar Juneja https://gitlab.com/VistaarJ/
-Abhishek Tyagi https://gitlab.com/tyagiabhishek13/
-Jayesh Mathur https://gitlab.com/jayeshmathur123/
+Abhishek Yadav https://github.com/abhiyadav1323/
 
 --------------------------------------------------------------------------------
 
